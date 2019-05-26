@@ -112,7 +112,7 @@ void MainWindow::on_signUp_btn_clicked()//注册
                 string s2=city_graph.City_Name[User->status.dest];
                 string s3="-->";
                 string str=s1+s3+s2;
-                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(str));
+                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(str.c_str()));
 
 
                 ui->allUser_tb->setItem(RowCount,3,new QTableWidgetItem(tr(User->status.name)));
