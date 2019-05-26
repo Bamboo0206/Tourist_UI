@@ -30,7 +30,7 @@ void outputRouteDlg::on_start_btn_clicked()
     User->qPath->moveTo(coordinate[location].x,coordinate[location].y/*起点坐标*/);
     User->red=rand()%256;
     User->green=rand()%256;
-    User->blue==rand()%256;
+    User->blue=rand()%256;
 
     /*加入passenger链表*/
     if (Passengers_headPtr == NULL)

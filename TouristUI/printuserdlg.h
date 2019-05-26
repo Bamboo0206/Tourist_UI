@@ -1,4 +1,4 @@
-#ifndef PRINTUSERDLG_H
+﻿#ifndef PRINTUSERDLG_H
 #define PRINTUSERDLG_H
 
 #include <QDialog>

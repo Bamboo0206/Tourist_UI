@@ -134,15 +134,15 @@ typedef struct pathnode
 
 
 /*函数声明*/
-unsigned __stdcall mouse_thread(void* pArguments);
+//unsigned __stdcall mouse_thread(void* pArguments);
 unsigned __stdcall time_thread(void* pArguments);
 
 Status Prepare(void);
 Status Read_Map(FILE *fptr);
 void Read_trans_t();
 
-void Create_New_Passenger(PASSENGER *tailPtr);
-Status User_sign_in(void);
+//void Create_New_Passenger(PASSENGER *tailPtr);
+//Status User_sign_in(void);
 void Min_Cost();
 Status Min_Time();
 Status Min_Time_Limited_Time();

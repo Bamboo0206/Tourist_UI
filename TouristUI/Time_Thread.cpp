@@ -12,7 +12,7 @@ bool inputing = false;
 //假定最多10个旅客，缓存每个旅客的当前旅行到的第几个城市
 int Travelstate[10] = { 0 };
 
-unsigned __stdcall time(void* pArguments)
+unsigned __stdcall time_thread(void* pArguments)
 {
 	while (Quit == false)
 	{
