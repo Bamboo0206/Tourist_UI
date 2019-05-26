@@ -265,7 +265,7 @@ Status Limited_Time(PATH tour)
 	int time = Calculate_Time(tour);
 
 	if (time <= User->Time_Limited)
-		return ERROR;
+        return Error;
 
 	while (true)
 	{

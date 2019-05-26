@@ -2,9 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include<vector>
+#include <vector>
 #include <QPainter>
-#include"main.h"
+#include "main.h"
+
 extern GRAPH city_graph;
 
 namespace Ui {
@@ -17,7 +18,6 @@ class MainWindow : public QMainWindow
 
 public:
     vector <QPainterPath> v_Path;
-
 
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -40,7 +40,5 @@ private:
 
     Ui::MainWindow *ui;//???????
 };
-
-
 
 #endif // MAINWINDOW_H

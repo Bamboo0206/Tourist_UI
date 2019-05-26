@@ -1,16 +1,16 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include"logindlg.h"
-#include"loginoptiondlg.h"
-#include"newroutedlg.h"
-#include"signupdlg.h"
-#include"printuserdlg.h"
-#include"passbydlg.h"
-#include"outputroutedlg.h"
-#include<QImage>
+#include "logindlg.h"
+#include "loginoptiondlg.h"
+#include "newroutedlg.h"
+#include "signupdlg.h"
+#include "printuserdlg.h"
+#include "passbydlg.h"
+#include "outputroutedlg.h"
+#include <QImage>
 #include <QtGui>
-#include<vector>
-#include"main.h"
+#include <vector>
+#include "main.h"
 
 extern bool inputing;
 extern bool Quit;
@@ -20,7 +20,7 @@ extern GRAPH city_graph;
 extern int Travelstate[10];
 
 MainWindow *MW;
-COORDINATE coordinate[city_graph.Graph_size/*城市数量*/];
+COORDINATE coordinate[100/*城市数量*/];
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -65,7 +65,6 @@ void MainWindow::on_signIn_btn_clicked()//登陆
         /*显示选择操作的窗口*/
         LoginOptionDlg *loDlg=new LoginOptionDlg(this);
         loDlg->show();
-
     }
     inputing=false;
 }
@@ -97,7 +96,12 @@ void MainWindow::on_signUp_btn_clicked()//注册
 
             char *loca[5] = { "IN_CAR", "IN_TRAIN", "IN_AIRPLANE", "STAY_IN_CITY" , "ARRIVE" };
 
-            switch (User->status) {
+            //旅客姓名      状态                  地点                  车次
+            //a            STAY_IN_CITY         A
+            //b            IN_CAR               B --> C               Q26
+            //c            ARRIVE               D
+
+            switch (User->status.loca) {
             case STAY_IN_CITY:
                 ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[3])));
                 ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(tr(city_graph.City_Name[User->status.src])));
@@ -110,10 +114,9 @@ void MainWindow::on_signUp_btn_clicked()//注册
                 ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[(int)User->status.loca])));
                 string s1=city_graph.City_Name[User->status.src];
                 string s2=city_graph.City_Name[User->status.dest];
-                string s3="-->";
+                string s3=" --> ";
                 string str=s1+s3+s2;
-                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(str));
-
+                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(tr(str.c_str())));
 
                 ui->allUser_tb->setItem(RowCount,3,new QTableWidgetItem(tr(User->status.name)));
                 break;
@@ -190,7 +193,26 @@ void MainWindow::updatePath()
 
 void MainWindow::initCoordinate()//初始化每个城市的坐标
 {
-    //一个一个赋值？？
+    coordinate[0].x=780;
+    coordinate[0].y=339;
+    coordinate[1].x=793;
+    coordinate[1].y=365;
+    coordinate[2].x=627;
+    coordinate[2].y=488;
+    coordinate[3].x=880;
+    coordinate[3].y=561;
+    coordinate[4].x=734;
+    coordinate[4].y=579;
+    coordinate[5].x=526;
+    coordinate[5].y=573;
+    coordinate[6].x=500;
+    coordinate[6].y=704;
+    coordinate[7].x=708;
+    coordinate[7].y=632;
+    coordinate[8].x=714;
+    coordinate[8].y=747;
+    coordinate[9].x=823;
+    coordinate[9].y=542;
 }
 
 void MainWindow::on_exitSys_btn_clicked()
@@ -206,6 +228,7 @@ void MainWindow::change_sysTime()
            System_Time.year, System_Time.month, System_Time.date, System_Time.hour);
     ui->SysTime_lb->setText(t);//打印系统时间
 }
+
 void MainWindow::updateTable()//更新main里的表格
 {
     char *loca[5] = { "IN_CAR", "IN_TRAIN", "IN_AIRPLANE", "STAY_IN_CITY" , "ARRIVE" };
@@ -216,8 +239,7 @@ void MainWindow::updateTable()//更新main里的表格
     {
         ui->allUser_tb->setItem(Row,0,new QTableWidgetItem(tr(User->ID)));//改为变量
 
-
-        switch (User->status) {
+        switch (User->status.loca) {
         case STAY_IN_CITY:
             ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[3])));
             ui->allUser_tb->setItem(Row,2,new QTableWidgetItem(tr(city_graph.City_Name[User->status.src])));
@@ -232,10 +254,11 @@ void MainWindow::updateTable()//更新main里的表格
             string s2=city_graph.City_Name[User->status.dest];
             string s3="-->";
             string str=s1+s3+s2;
-            ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(str));
+            ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(tr(str.c_str())));
 
 
             ui->allUser_tb->setItem(RowCount,3,new QTableWidgetItem(tr(User->status.name)));
             break;
+        }
     }
 }
