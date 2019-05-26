@@ -25,7 +25,7 @@ private slots:
 
 private:
     Ui::ChangeUserInfoDlg *ui;
-    QLineEdit LimTime_le;
+    QLineEdit *LimTime_le;
 };
 
 #endif // CHANGEUSERINFODLG_H

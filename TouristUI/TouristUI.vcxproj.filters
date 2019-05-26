@@ -101,6 +101,9 @@
     <QtMoc Include="signupdlg.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="changeuserinfodlg.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="mainwindow.ui">
