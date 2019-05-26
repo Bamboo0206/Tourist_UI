@@ -27,7 +27,7 @@ const bool DEBUG = true;//debug标志
 
 /*枚举类型*/
 enum Vehicle { CAR, TRAIN, AIRPLANE };
-enum Status { ERROR, OK, STACK_FULL, STACK_EMPTY, UNABLE };
+enum Status { Error, OK, STACK_FULL, STACK_EMPTY, UNABLE };
 enum Travel_Strategy { STRA_minCOST, STRA_minTIME, STRA_limTIME_minCOST };
 enum Location { IN_CAR, IN_TRAIN, IN_AIRPLANE, STAY_IN_CITY, ARRIVE };
 
@@ -134,8 +134,8 @@ typedef struct pathnode
 
 
 /*函数声明*/
-unsigned __stdcall mouse(void* pArguments);
-unsigned __stdcall time(void* pArguments);
+unsigned __stdcall mouse_thread(void* pArguments);
+unsigned __stdcall time_thread(void* pArguments);
 
 Status Prepare(void);
 Status Read_Map(FILE *fptr);
