@@ -4,7 +4,7 @@
 
 PASSENGER *Passengers = NULL, *Passengers_tailPtr = NULL, *User;//User当前系统使用者
 extern int Travelstate[10];
-extern COORDINATE coordinate[city_graph.Graph_size/*城市数量*/];
+extern COORDINATE coordinate[100/*城市数量*/];
 
 outputRouteDlg::outputRouteDlg(QWidget *parent) :
     QDialog(parent),

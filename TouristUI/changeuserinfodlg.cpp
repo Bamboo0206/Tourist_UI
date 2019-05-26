@@ -6,6 +6,10 @@
 
 PASSENGER *Passengers = NULL, *Passengers_tailPtr = NULL
         , *User;//User当前系统使用者
+extern GRAPH city_graph;
+extern SYSTEM_TIME System_Time;
+extern FILE *fptr_input;
+extern int Travelstate[10];
 
 ChangeUserInfoDlg::ChangeUserInfoDlg(QWidget *parent) :
     QDialog(parent),

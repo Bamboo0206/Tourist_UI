@@ -1,4 +1,7 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+﻿#ifndef MYTOURISTMAIN_H
+#define MYTOURISTMAIN_H
+
+#define _CRT_SECURE_NO_WARNINGS
 #include<iostream>
 #include<stdio.h>
 #include<stdlib.h>
@@ -167,6 +170,6 @@ int Calculate_Time(PATH tour);
 int Calculate_Cost(PATH tour);
 
 
-
+#endif  //MYTOURISTMAIN_H
 
 

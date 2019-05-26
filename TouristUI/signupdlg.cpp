@@ -24,7 +24,7 @@ void SignupDlg::on_signUp_btn_clicked()//注册按钮被按下
 
     if(User)//不为空
     {
-        QDebug<<"User不为空,我把它覆盖了";
+        qDebug()<<"User不为空,我把它覆盖了";
     }
     User = new PASSENGER;
     User->next_passenger=NULL;
