@@ -13,14 +13,14 @@ void Write_status_file(PASSENGER &psg)
 {
 	//将User的状态结构体写入文件
 	char str2[100] = { '\0' };
-	char *loca[4] = { "CAR", "TRAIN", "AIRPLANE", "STAY_IN_CITY" };
+    string loca[4] = { "CAR", "TRAIN", "AIRPLANE", "STAY_IN_CITY" };
 
 	//旅客旅行时刻
 	memset(str2, 0, sizeof(str2));
 	sprintf(str2, "%d - %d - %d  %d : 00 : 00", System_Time.year, System_Time.month, System_Time.date, System_Time.hour);
 	WritePrivateProfileStringA(psg.ID, "System Time", str2, ".\\Status_File.ini");
 	//旅客所处状态（某种交通工具或停留在某个城市）
-	WritePrivateProfileStringA(psg.ID, "旅行状态", loca[(int)(psg.status.loca)], ".\\Status_File.ini");
+    WritePrivateProfileStringA(psg.ID, "旅行状态", loca[(int)(psg.status.loca)].c_str(), ".\\Status_File.ini");
 	//旅客所在城市
 	memset(str2, 0, sizeof(str2));
 	sprintf(str2, "%s  ==》 %s", city_graph.City_Name[psg.status.src], city_graph.City_Name[psg.status.dest]);

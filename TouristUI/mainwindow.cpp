@@ -94,7 +94,7 @@ void MainWindow::on_signUp_btn_clicked()//注册
             /*待改 插入元素*/
             ui->allUser_tb->setItem(RowCount,0,new QTableWidgetItem(tr(User->ID)));//改为变量
 
-            char *loca[5] = { "IN_CAR", "IN_TRAIN", "IN_AIRPLANE", "STAY_IN_CITY" , "ARRIVE" };
+            string loca[5] = { "IN_CAR", "IN_TRAIN", "IN_AIRPLANE", "STAY_IN_CITY" , "ARRIVE" };
 
             //旅客姓名      状态                  地点                  车次
             //a            STAY_IN_CITY         A
@@ -103,15 +103,15 @@ void MainWindow::on_signUp_btn_clicked()//注册
 
             switch (User->status.loca) {
             case STAY_IN_CITY:
-                ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[3])));
+                ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[3].c_str())));
                 ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(tr(city_graph.City_Name[User->status.src])));
                 break;
             case ARRIVE:
-                ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[4])));
+                ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[4].c_str())));
                 ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(tr(city_graph.City_Name[User->status.dest])));
                 break;
             default:
-                ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[(int)User->status.loca])));
+                ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[(int)User->status.loca].c_str())));
                 string s1=city_graph.City_Name[User->status.src];
                 string s2=city_graph.City_Name[User->status.dest];
                 string s3=" --> ";
@@ -231,7 +231,7 @@ void MainWindow::change_sysTime()
 
 void MainWindow::updateTable()//更新main里的表格
 {
-    char *loca[5] = { "IN_CAR", "IN_TRAIN", "IN_AIRPLANE", "STAY_IN_CITY" , "ARRIVE" };
+    string loca[5] = { "IN_CAR", "IN_TRAIN", "IN_AIRPLANE", "STAY_IN_CITY" , "ARRIVE" };
     int RowCount=ui->allUser_tb->rowCount();
     PASSENGER *temp=Passengers;
     int Row=0;
@@ -241,15 +241,15 @@ void MainWindow::updateTable()//更新main里的表格
 
         switch (User->status.loca) {
         case STAY_IN_CITY:
-            ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[3])));
+            ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[3].c_str())));
             ui->allUser_tb->setItem(Row,2,new QTableWidgetItem(tr(city_graph.City_Name[User->status.src])));
             break;
         case ARRIVE:
-            ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[4])));
+            ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[4].c_str())));
             ui->allUser_tb->setItem(Row,2,new QTableWidgetItem(tr(city_graph.City_Name[User->status.dest])));
             break;
         default:
-            ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[(int)User->status.loca])));
+            ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[(int)User->status.loca].c_str())));
             string s1=city_graph.City_Name[User->status.src];
             string s2=city_graph.City_Name[User->status.dest];
             string s3="-->";

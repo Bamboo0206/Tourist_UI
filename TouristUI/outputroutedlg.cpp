@@ -6,6 +6,8 @@ PASSENGER *Passengers = NULL, *Passengers_tailPtr = NULL, *User;//User当前系�
 extern int Travelstate[10];
 extern COORDINATE coordinate[100/*城市数量*/];
 
+#define Passengers_headPtr Passengers
+
 outputRouteDlg::outputRouteDlg(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::outputRouteDlg)
