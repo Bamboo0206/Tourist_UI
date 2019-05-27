@@ -29,8 +29,8 @@ void SignupDlg::on_signUp_btn_clicked()//注册按钮被按下
     User = new PASSENGER;
     User->next_passenger=NULL;
 
-    char *chID[]=ui->userName_lineEdit->text().toLatin1();
-    strcpy(User->ID,chID);//输入用户名
+    //char chID[]=;
+    strcpy(User->ID, ui->userName_lineEdit->text().toLatin1().data());//输入用户名
 
     accept();
 
