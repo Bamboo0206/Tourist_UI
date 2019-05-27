@@ -49,14 +49,16 @@ void passbyDlg::on_pushButton_clicked()//关闭对话框
     /*待改：在此获取表格输入*/
     int RowCount=ui->passby_tb->rowCount();
     cout<<"RowCount:"<<RowCount<<endl;
+    QComboBox *combox;
     for(int i=0; i < RowCount;i++)
     {
         //row0要求途经的城市;row1在该地停留时间
-        cout<<"No."<<i<<"city:"<<ui->passby_tb->item(i,0)->text().toInt()
-        <<"\t time:"<<ui->passby_tb->item(i,1)->text().toInt()<<endl;
 
-        User->pass_by[0][i]= ui->passby_tb->item(i,0)->text().toInt();
+        combox=(QComboBox*)ui->passby_tb->cellWidget(i,0);
+        User->pass_by[0][i]= combox->currentIndex();
         User->pass_by[1][i]= ui->passby_tb->item(i,1)->text().toInt();
+        cout<<"No."<<i<<"city:"<<User->pass_by[0][i]
+        <<"\t time:"<<User->pass_by[1][i]<<endl;
     }
     cout<<"got input: pass by"<<endl;
 

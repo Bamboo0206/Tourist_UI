@@ -6,12 +6,28 @@
 
 extern PASSENGER *Passengers , *Passengers_tailPtr 
         , *User;//User当前系统使用者
+extern GRAPH city_graph;
 
 newRouteDlg::newRouteDlg(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::newRouteDlg)
 {
     ui->setupUi(this);
+
+    QStringList cities = QStringList()
+    <<QString::fromLocal8Bit(city_graph.City_Name[0])
+    <<QString::fromLocal8Bit(city_graph.City_Name[1])
+    <<QString::fromLocal8Bit(city_graph.City_Name[2])
+    <<QString::fromLocal8Bit(city_graph.City_Name[3])
+    <<QString::fromLocal8Bit(city_graph.City_Name[4])
+    <<QString::fromLocal8Bit(city_graph.City_Name[5])
+    <<QString::fromLocal8Bit(city_graph.City_Name[6])
+    <<QString::fromLocal8Bit(city_graph.City_Name[7])
+    <<QString::fromLocal8Bit(city_graph.City_Name[8])
+    <<QString::fromLocal8Bit(city_graph.City_Name[9]);
+
+    ui->src_cbx->addItems(cities);
+    ui->dest_cbx->addItems(cities);
 }
 
 newRouteDlg::~newRouteDlg()
@@ -31,7 +47,9 @@ void newRouteDlg::on_pushButton_2_clicked()
     if(User->strategy==2)
         User->Time_Limited = LimTime_le->text().toInt();
     else
-        User->Time_Limited= NULL;//??????
+        User->Time_Limited= NULL;
+    cout<<User->src<<User->dest<<User->strategy<<endl;
+
 
     /*调用计算路径的函数*/
     switch (User->strategy)
@@ -74,8 +92,8 @@ void newRouteDlg::on_strategy_cbx_currentIndexChanged(int index)//如果是限�
     if(index==2)
     {
         QLabel *lb=new QLabel(this);
-        lb->move(380,220);//参数待改
-        lb->setText(tr("请输入限制时间"));
+        lb->move(380,220);
+        lb->setText(QString::fromLocal8Bit("请输入限制时间"));
         lb->show();
 
         LimTime_le=new QLineEdit(this);

@@ -265,6 +265,8 @@ void Min_Cost()
 			}
 		}
 
+        cout<<"min cost route found."<<endl;
+
 		/*待改：调用函数将结果写入文件？*/
 		/*改为链表*/
 		PATH headptr = NULL, currentptr = NULL, tailptr = NULL;

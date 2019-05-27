@@ -26,10 +26,10 @@ void SignupDlg::on_signUp_btn_clicked()//注册按钮被按下
     {
         qDebug()<<"User不为空,我把它覆盖了";
     }
+
+    /*新建用户*/
     User = new PASSENGER;
     User->next_passenger=NULL;
-
-    //char chID[]=;
     strcpy(User->ID, ui->userName_lineEdit->text().toLatin1().data());//输入用户名
 
     accept();

@@ -45,9 +45,12 @@ void LoginDlg::on_login_btn_clicked()
     //用户不存在，需要重新输入ID
     if (find_passenger == false)
     {
-        QMessageBox::warning(this, tr("警告！"),
-                           tr("用户名不存在！"),
+        QMessageBox::warning(this, QString::fromLocal8Bit("警告！"),
+                           QString::fromLocal8Bit("用户名不存在！"),
                            QMessageBox::Yes);
+        //清空内容并定位光标
+        ui->userName_lineEdit->clear();
+        ui->userName_lineEdit->setFocus();
     }
 
     else
