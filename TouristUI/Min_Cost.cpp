@@ -46,6 +46,7 @@ void Init_Graph_MinCost()//遍历整个图，将其边初的权重始化
 */
 int Dijkstra_MinCost(const int src, const int dest, vector<int> &path)
 {
+    cout<<"Dijkstra_MinCost() called"<<endl;
 	/*初始化*/
 	/*bool collected[MAX_NODE_NUM] = { false };
 	int dist[MAX_NODE_NUM];*/
@@ -133,15 +134,15 @@ int Dijkstra_MinCost(const int src, const int dest, vector<int> &path)
 	/*弹栈，得到正序*/
 	int i = 0, cost_count = 0, W;//WV为一条弧，W为弧尾，V为弧头，由弧尾指向弧头
 	W = s.top();
-	s.pop();//删除栈顶元素但不返回其值  
-	path.push_back(W);//返回栈顶的元素，但不删除该元素  
+	s.pop();//删除栈顶元素但不返回其值  
+	path.push_back(W);//返回栈顶的元素，但不删除该元素  
 	while (!s.empty())//栈非空
 	{
 		V = s.top();
-		path.push_back(V);//返回栈顶的元素，但不删除该元素  
+		path.push_back(V);//返回栈顶的元素，但不删除该元素  
 		cost_count += city_graph.pp_G[W][V].weight;
 		W = V;
-		s.pop();//删除栈顶元素但不返回其值  
+		s.pop();//删除栈顶元素但不返回其值  
 		++i;
 	}
 
@@ -304,4 +305,5 @@ void Min_Cost()
 			free(currentptr);
 		}
 	}
+    cout<<"MinCost() done"<<endl;
 }

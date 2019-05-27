@@ -26,12 +26,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    cout<<"creating MainWindow\n";
+    cout<<"creating MainWindow"<<endl;
     ui->setupUi(this);
 
     /*添加图片*/
     QImage *img=new QImage;//新建一个image对象
-    if(!(img->load("D:/QT/project/Tourist/map.jpg")))//将图像资源载入对象img
+    if(!(img->load("D:/SourceCode/Tourist_UI/TouristUI/map.jpg")))//将图像资源载入对象img
     {
         ui->pic_lb->setText("fail to load picture");
     }
@@ -41,7 +41,10 @@ MainWindow::MainWindow(QWidget *parent) :
     /*设置当前用户的表格*/
     ui->allUser_tb->setColumnCount(4);//列数
     ui->allUser_tb->setHorizontalHeaderLabels(
-                QStringList()<<"用户名"<<"状态"<<"所在地"<<"班次");
+                QStringList()<<QString::fromLocal8Bit("用户名")
+                <<QStringList()<<QString::fromLocal8Bit("状态")
+                <<QStringList()<<QString::fromLocal8Bit("所在地")
+                <<QStringList()<<QString::fromLocal8Bit("班次"));
     ui->allUser_tb->setEditTriggers(QAbstractItemView::NoEditTriggers);//禁止修改
 
     /*添加定时器*/
@@ -50,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer,SIGNAL(timeout()),this,SLOT(update()));//更新画图
     timer->start(1000);//每1000ms timeout一次，于是就update一次
 
+    cout<<"create MainWindow successfully"<<endl;
 }
 
 MainWindow::~MainWindow()
@@ -214,6 +218,7 @@ void MainWindow::initCoordinate()//初始化每个城市的坐标
     coordinate[8].y=747;
     coordinate[9].x=823;
     coordinate[9].y=542;
+    cout<<"initial coordinate successfully"<<endl;
 }
 
 void MainWindow::on_exitSys_btn_clicked()

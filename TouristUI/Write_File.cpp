@@ -18,13 +18,13 @@ void Write_status_file(PASSENGER &psg)
 	//旅客旅行时刻
 	memset(str2, 0, sizeof(str2));
 	sprintf(str2, "%d - %d - %d  %d : 00 : 00", System_Time.year, System_Time.month, System_Time.date, System_Time.hour);
-    WritePrivateProfileStringA(psg.ID, "System Time", str2, "D:\\SourceCode\\Tourist_UI\\TouristUI\\Status_File.ini");
+    WritePrivateProfileStringA(psg.ID, "System Time", str2, ".\\Status_File.ini");
 	//旅客所处状态（某种交通工具或停留在某个城市）
-    WritePrivateProfileStringA(psg.ID, "旅行状态", loca[(int)(psg.status.loca)].c_str(), "D:\\SourceCode\\Tourist_UI\\TouristUI\\Status_File.ini");
+    WritePrivateProfileStringA(psg.ID, "旅行状态", loca[(int)(psg.status.loca)].c_str(), ".\\Status_File.ini");
 	//旅客所在城市
 	memset(str2, 0, sizeof(str2));
 	sprintf(str2, "%s  ==》 %s", city_graph.City_Name[psg.status.src], city_graph.City_Name[psg.status.dest]);
-    WritePrivateProfileStringA(psg.ID, "地理位置", str2, "D:\\SourceCode\\Tourist_UI\\TouristUI\\Status_File.ini");
+    WritePrivateProfileStringA(psg.ID, "地理位置", str2, ".\\Status_File.ini");
 }
 
 void Write_user_file(int choice)
@@ -38,29 +38,29 @@ void Write_user_file(int choice)
 	{
 	case 1://sign_up
 		//添加Sign_in_number和Sign_out_number键，记录用户登录登出次数
-        WritePrivateProfileStringA(User->ID, "Sign_in_number", "0", "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_File.ini");
-        WritePrivateProfileStringA(User->ID, "Sign_out_number", "0", "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_File.ini");
+        WritePrivateProfileStringA(User->ID, "Sign_in_number", "0", ".\\User_File.ini");
+        WritePrivateProfileStringA(User->ID, "Sign_out_number", "0", ".\\User_File.ini");
 		//记录用户注册信息
 		memset(str2, 0, sizeof(str2));
 		sprintf(str2, "%d - %d - %d  %d : 00 : 00", System_Time.year, System_Time.month, System_Time.date, System_Time.hour);
-        WritePrivateProfileStringA(User->ID, "Sign_up", str2, "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_File.ini");
+        WritePrivateProfileStringA(User->ID, "Sign_up", str2, ".\\User_File.ini");
 
 		break;
 	case 2://sign_in
-        number1=GetPrivateProfileIntA(User->ID, "Sign_in_number", 0, "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_File.ini");
+        number1=GetPrivateProfileIntA(User->ID, "Sign_in_number", 0, ".\\User_File.ini");
 		memset(str1, 0, sizeof(str1));
 		sprintf(str1, "Sign In No.%d", ++number1);
 		memset(str2, 0, sizeof(str2));
 		sprintf(str2, "%d - %d - %d  %d : 00 : 00", System_Time.year, System_Time.month, System_Time.date, System_Time.hour);
-        WritePrivateProfileStringA(User->ID, str1, str2, "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_File.ini");
+        WritePrivateProfileStringA(User->ID, str1, str2, ".\\User_File.ini");
 		break;
 	case 3://sign_out
-        number2 = GetPrivateProfileIntA(User->ID, "Sign_out_number", 0, "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_File.ini");
+        number2 = GetPrivateProfileIntA(User->ID, "Sign_out_number", 0, ".\\User_File.ini");
 		memset(str1, 0, sizeof(str1));
 		sprintf(str1, "Sign Out No.%d", ++number2);
 		memset(str2, 0, sizeof(str2));
 		sprintf(str2, "%d - %d - %d  %d : 00 : 00", System_Time.year, System_Time.month, System_Time.date, System_Time.hour);
-        WritePrivateProfileStringA(User->ID, str1, str2, "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_File.ini");
+        WritePrivateProfileStringA(User->ID, str1, str2, ".\\User_File.ini");
 		break;
 	default:
 		break;
@@ -70,7 +70,7 @@ void Write_user_file(int choice)
 
 void Write_route_file(PATH tour)
 {
-    char filename[100] = { "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_Route.ini" };
+    char filename[100] = { ".\\User_Route.ini" };
 	char str1[100];
 
 	//找到用户旅游的状态
@@ -105,8 +105,8 @@ Status Write_system_file()
 		cout << "Called Write_system_file()" << endl;
 
 	//基本信息
-    WritePrivateProfileStringA("able_or_unable", "able", "1", "D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
-    WritePrivateProfileStructA("System_Time", "time", &System_Time, sizeof(SYSTEM_TIME), "D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
+    WritePrivateProfileStringA("able_or_unable", "able", "1", ".\\System_File.ini");
+    WritePrivateProfileStructA("System_Time", "time", &System_Time, sizeof(SYSTEM_TIME), ".\\System_File.ini");
 	/*WritePrivateProfileStructA("GRAPH", "graph", &city_graph, sizeof(GRAPH), ".\\System_File.ini");
 
 	char size[10] = { '\0' };
@@ -124,7 +124,7 @@ Status Write_system_file()
 	char str1[100];
 	memset(str1, 0, sizeof(str1));
 	sprintf(str1, "%d", number);
-    WritePrivateProfileStringA("Passenger", "number", str1, "D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
+    WritePrivateProfileStringA("Passenger", "number", str1, ".\\System_File.ini");
 
 	//逐个将旅客信息写入文档
 	int i = 0;
@@ -135,12 +135,12 @@ Status Write_system_file()
 		{
 			memset(str1, 0, sizeof(str1));
 			sprintf(str1, "%d", i);
-            WritePrivateProfileStringA("Passenger", "User", str1, "D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
+            WritePrivateProfileStringA("Passenger", "User", str1, ".\\System_File.ini");
 		}
 
 		memset(str1, 0, sizeof(str1));
 		sprintf(str1, "No.%d", i);
-        WritePrivateProfileStructA("Passenger", str1, temp, sizeof(PASSENGER), "D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
+        WritePrivateProfileStructA("Passenger", str1, temp, sizeof(PASSENGER), ".\\System_File.ini");
 		temp = temp->next_passenger;
 	}
 
@@ -153,7 +153,7 @@ Status Read_system_file()
 		cout << "Called Read_system_file()" << endl;
 
 	//判断system_file中是否有可读内容
-    int able = GetPrivateProfileIntA("able_or_unable", "able", 0, "D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
+    int able = GetPrivateProfileIntA("able_or_unable", "able", 0, ".\\System_File.ini");
 	if (able == 0)
 	{
 		printf("没有系统使用记录，无法恢复系统！\n");
@@ -161,7 +161,7 @@ Status Read_system_file()
 	}
 
 	//读取系统时间
-    GetPrivateProfileStructA("System_Time", "time", &System_Time, sizeof(SYSTEM_TIME), "D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
+    GetPrivateProfileStructA("System_Time", "time", &System_Time, sizeof(SYSTEM_TIME), ".\\System_File.ini");
 	////读取地图信息
 	//int graph_size = GetPrivateProfileIntA("GRAPH", "graph_size", 0, ".\\System_File.ini");
 
@@ -183,7 +183,7 @@ Status Read_system_file()
 		//读取第一个旅客
 		PASSENGER **temp = &Passengers;
 		Passengers = (PASSENGER*)malloc(sizeof(PASSENGER));
-        GetPrivateProfileStructA("Passenger", "No.1", Passengers, sizeof(PASSENGER), "D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
+        GetPrivateProfileStructA("Passenger", "No.1", Passengers, sizeof(PASSENGER), ".\\System_File.ini");
 		
 		//读取后续旅客
 		int i = 2;
@@ -193,7 +193,7 @@ Status Read_system_file()
 			memset(str1, 0, sizeof(str1));
 			sprintf(str1, "No.%d", i);
 			(*temp)->next_passenger = (PASSENGER*)malloc(sizeof(PASSENGER));
-            GetPrivateProfileStructA("Passenger", str1, (*temp)->next_passenger, sizeof(PASSENGER), "D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
+            GetPrivateProfileStructA("Passenger", str1, (*temp)->next_passenger, sizeof(PASSENGER), ".\\System_File.ini");
 			temp = &((*temp)->next_passenger);
 		}
 

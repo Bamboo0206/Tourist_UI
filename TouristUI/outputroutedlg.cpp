@@ -13,9 +13,10 @@ outputRouteDlg::outputRouteDlg(QWidget *parent) :
     ui(new Ui::outputRouteDlg)
 {
     ui->setupUi(this);
+    cout<<"output Route"<<endl;
 
     /*输出路径*/
-
+    //ui->
 }
 
 outputRouteDlg::~outputRouteDlg()

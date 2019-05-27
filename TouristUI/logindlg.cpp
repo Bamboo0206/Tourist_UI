@@ -21,9 +21,36 @@ LoginDlg::~LoginDlg()
 
 void LoginDlg::on_login_btn_clicked()
 {
-    ui->userName_lineEdit->text();
-    //char chID[]=;
-    strcpy(User->ID, ui->userName_lineEdit->text().toLatin1().data());//输入用户名
+    char userID[100];
+    strcpy(userID, ui->userName_lineEdit->text().toLatin1().data());//输入用户名
+
+    bool find_passenger = false;
+    PASSENGER *temp = Passengers;
+
+    //寻找与用户输入ID匹配的旅客
+    while (temp != NULL && !find_passenger)
+    {
+        if (strcmp(userID, temp->ID) != 0)
+        {
+            temp = temp->next_passenger;
+        }
+        else
+        {
+            User = temp;
+            Write_user_file(2);
+            find_passenger = true;
+        }
+    }
+
+    //用户不存在，需要重新输入ID
+    if (find_passenger == false)
+    {
+        QMessageBox::warning(this, tr("警告！"),
+                           tr("用户名不存在！"),
+                           QMessageBox::Yes);
+    }
+
+    else
     accept();
 
     /*if(1)//待改：如果用户名存在

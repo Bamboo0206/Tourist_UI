@@ -2,6 +2,8 @@
 #include<windows.h>
 #include<process.h>
 #include"mainwindow.h"
+#include <QElapsedTimer>
+#include <QApplication>
 
 SYSTEM_TIME System_Time;
 extern bool Quit;
@@ -16,6 +18,9 @@ unsigned __stdcall time_thread(void* pArguments)
 {
 	while (Quit == false)
 	{
+        //????
+        QApplication::processEvents();
+
 		if (!inputing)
 		{
 			Sleep(10000);

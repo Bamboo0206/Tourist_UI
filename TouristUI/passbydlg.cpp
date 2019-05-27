@@ -6,7 +6,7 @@
 #include"main.h"
 
 extern PASSENGER *Passengers , *Passengers_tailPtr , *User;//User当前系统使用者
-
+extern GRAPH city_graph;
 
 passbyDlg::passbyDlg(QWidget *parent) :
     QDialog(parent),
@@ -29,7 +29,16 @@ void passbyDlg::setPassby_tb(int row=0)
     {
         QComboBox *combox=new QComboBox();
         QStringList cities = QStringList()
-                        <<QString::fromLocal8Bit("北京")<<QString::fromLocal8Bit("天津");
+        <<QString::fromLocal8Bit(city_graph.City_Name[0])
+        <<QString::fromLocal8Bit(city_graph.City_Name[1])
+        <<QString::fromLocal8Bit(city_graph.City_Name[2])
+        <<QString::fromLocal8Bit(city_graph.City_Name[3])
+        <<QString::fromLocal8Bit(city_graph.City_Name[4])
+        <<QString::fromLocal8Bit(city_graph.City_Name[5])
+        <<QString::fromLocal8Bit(city_graph.City_Name[6])
+        <<QString::fromLocal8Bit(city_graph.City_Name[7])
+        <<QString::fromLocal8Bit(city_graph.City_Name[8])
+        <<QString::fromLocal8Bit(city_graph.City_Name[9]);
         combox->addItems(cities);
         ui->passby_tb->setCellWidget(i,0,combox);
     }
@@ -38,13 +47,18 @@ void passbyDlg::setPassby_tb(int row=0)
 void passbyDlg::on_pushButton_clicked()//关闭对话框
 {
     /*待改：在此获取表格输入*/
-    for(int i=0; i < ui->passby_tb->rowCount();i++)
+    int RowCount=ui->passby_tb->rowCount();
+    cout<<"RowCount:"<<RowCount<<endl;
+    for(int i=0; i < RowCount;i++)
     {
         //row0要求途经的城市;row1在该地停留时间
+        cout<<"No."<<i<<"city:"<<ui->passby_tb->item(i,0)->text().toInt()
+        <<"\t time:"<<ui->passby_tb->item(i,1)->text().toInt()<<endl;
+
         User->pass_by[0][i]= ui->passby_tb->item(i,0)->text().toInt();
         User->pass_by[1][i]= ui->passby_tb->item(i,1)->text().toInt();
     }
-
+    cout<<"got input: pass by"<<endl;
 
     /*关闭对话框*/
     accept();

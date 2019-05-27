@@ -43,6 +43,7 @@ Status Prepare(void)
 	//读取地图
 	FILE *fmap;
     fopen_s(&fmap, "D:\\SourceCode\\Tourist_UI\\TouristUI\\map.txt", "r");
+    //fopen_s(&fmap, ".\\map.txt", "r");
 	if (fmap == NULL)
 		cout << "Open file map.txt ERROR!" << endl;
 	else
@@ -55,6 +56,7 @@ Status Prepare(void)
 	}
 
     fopen_s(&fptr_input, "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_input.txt", "w");
+    //fopen_s(&fptr_input, ".\\User_input.txt", "w");
 
 	//读取航班表
 	Read_trans_t();

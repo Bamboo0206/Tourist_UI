@@ -18,13 +18,14 @@ int main(int argc, char *argv[])
     if (Prepare() != OK)
         cout << "Function Prepare ERROR" << endl;
 
+    cout<<"创建mouse_thread线程和time_thread线程"<<endl;
+
     //创建mouse_thread线程和time_thread线程
-    HANDLE Time_Thread = (HANDLE)_beginthreadex(NULL, 0, time_thread, NULL, 0, NULL);
+    //HANDLE Time_Thread = (HANDLE)_beginthreadex(NULL, 0, time_thread, NULL, 0, NULL);
     //命令行版本
     //HANDLE mouse_thread = (HANDLE)_beginthreadex(NULL, 0, mouse_thread, NULL, 0, NULL);
 
-
-
+    cout<<"创建mouse_thread线程和time_thread线程完成"<<endl;
 
 
     MainWindow w;
@@ -32,6 +33,7 @@ int main(int argc, char *argv[])
 
     w.initCoordinate();
     w.show();
+    cout<<"MainWindow showed"<<endl;
     MW = &w;
 
 
@@ -39,8 +41,8 @@ int main(int argc, char *argv[])
     /*WaitForSingleObject(mouse_thread, MY_INFINITE);
     CloseHandle(mouse_thread);*/
     //等待线程关闭信号，退出线程
-    WaitForSingleObject(Time_Thread, MY_INFINITE);
-    CloseHandle(Time_Thread);
+    /*WaitForSingleObject(Time_Thread, MY_INFINITE);
+    CloseHandle(Time_Thread);*/
 
     return a.exec();
 }
