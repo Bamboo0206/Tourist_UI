@@ -21,8 +21,8 @@ LoginDlg::~LoginDlg()
 void LoginDlg::on_login_btn_clicked()
 {
     ui->userName_lineEdit->text();
-    char *chID[]=ui->userName_lineEdit->text().toLatin1();
-    strcpy(User->ID,chID);//输入用户名
+    //char chID[]=;
+    strcpy(User->ID, ui->userName_lineEdit->text().toLatin1().data());//输入用户名
     accept();
 
     /*if(1)//待改：如果用户名存在

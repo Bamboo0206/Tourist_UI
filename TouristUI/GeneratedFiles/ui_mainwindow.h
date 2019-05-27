@@ -36,6 +36,7 @@ public:
     QPushButton *signIn_btn;
     QPushButton *exitSys_btn;
     QLabel *label;
+    QPushButton *pushButton;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -75,10 +76,13 @@ public:
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(540, 480, 121, 101));
+        pushButton = new QPushButton(centralWidget);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+        pushButton->setGeometry(QRect(780, 340, 241, 141));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1503, 26));
+        menuBar->setGeometry(QRect(0, 0, 1503, 23));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -103,6 +107,7 @@ public:
         signIn_btn->setText(QApplication::translate("MainWindow", "\347\231\273\351\231\206", nullptr));
         exitSys_btn->setText(QApplication::translate("MainWindow", "\351\200\200\345\207\272\347\263\273\347\273\237", nullptr));
         label->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
+        pushButton->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
     } // retranslateUi
 
 };
