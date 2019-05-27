@@ -26,16 +26,17 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    cout<<"creating MainWindow\n";
     ui->setupUi(this);
 
     /*添加图片*/
-    /*QImage *img=new QImage;//新建一个image对象
+    QImage *img=new QImage;//新建一个image对象
     if(!(img->load("D:/QT/project/Tourist/map.jpg")))//将图像资源载入对象img
     {
         ui->pic_lb->setText("fail to load picture");
     }
     else
-        ui->pic_lb->setPixmap((QPixmap::fromImage(*img)));*/
+        ui->pic_lb->setPixmap((QPixmap::fromImage(*img)));
 
     /*设置当前用户的表格*/
     ui->allUser_tb->setColumnCount(4);//列数

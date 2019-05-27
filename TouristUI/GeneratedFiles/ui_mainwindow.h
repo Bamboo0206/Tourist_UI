@@ -35,8 +35,6 @@ public:
     QPushButton *signUp_btn;
     QPushButton *signIn_btn;
     QPushButton *exitSys_btn;
-    QLabel *label;
-    QPushButton *pushButton;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -51,7 +49,7 @@ public:
         pic_lb = new QLabel(centralWidget);
         pic_lb->setObjectName(QStringLiteral("pic_lb"));
         pic_lb->setGeometry(QRect(20, 20, 1021, 811));
-        pic_lb->setStyleSheet(QStringLiteral("background-image:url(:/map.jpg)"));
+        pic_lb->setStyleSheet(QStringLiteral(""));
         lable = new QLabel(centralWidget);
         lable->setObjectName(QStringLiteral("lable"));
         lable->setGeometry(QRect(1070, 110, 72, 15));
@@ -73,16 +71,10 @@ public:
         exitSys_btn = new QPushButton(centralWidget);
         exitSys_btn->setObjectName(QStringLiteral("exitSys_btn"));
         exitSys_btn->setGeometry(QRect(1210, 650, 93, 28));
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(540, 480, 121, 101));
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(780, 340, 241, 141));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1503, 23));
+        menuBar->setGeometry(QRect(0, 0, 1503, 26));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -106,8 +98,6 @@ public:
         signUp_btn->setText(QApplication::translate("MainWindow", "\346\263\250\345\206\214", nullptr));
         signIn_btn->setText(QApplication::translate("MainWindow", "\347\231\273\351\231\206", nullptr));
         exitSys_btn->setText(QApplication::translate("MainWindow", "\351\200\200\345\207\272\347\263\273\347\273\237", nullptr));
-        label->setText(QApplication::translate("MainWindow", "TextLabel", nullptr));
-        pushButton->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
     } // retranslateUi
 
 };

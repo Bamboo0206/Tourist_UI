@@ -1,4 +1,5 @@
 ﻿#include "mainwindow.h"
+
 #include <QApplication>
 #include "main.h"
 #include <windows.h>
@@ -10,6 +11,7 @@ extern MainWindow *MW;
 
 int main(int argc, char *argv[])
 {
+    QApplication a(argc, argv);
     srand((unsigned)time(NULL));
 
     //准备函数
@@ -21,12 +23,17 @@ int main(int argc, char *argv[])
     //命令行版本
     //HANDLE mouse_thread = (HANDLE)_beginthreadex(NULL, 0, mouse_thread, NULL, 0, NULL);
 
-    QApplication a(argc, argv);
+
+
+
+
     MainWindow w;
     //MW指针用于关闭mainwindow
-    MW = &w;
+
     w.initCoordinate();
     w.show();
+    MW = &w;
+
 
     //等待线程关闭信号，退出线程
     /*WaitForSingleObject(mouse_thread, MY_INFINITE);

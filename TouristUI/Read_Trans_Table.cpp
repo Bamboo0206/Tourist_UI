@@ -8,7 +8,7 @@ void Read_trans_t()
 		cout << "Called Read_trans_t()" << endl;
 
 	fstream f_trans;
-	f_trans.open("Transtable.txt", fstream::in);
+    f_trans.open("D:\\SourceCode\\Tourist_UI\\TouristUI\\Transtable.txt", fstream::in);
 	if (!f_trans)
 		cerr << "Transtable.txt打开失败\n";
 	f_trans.seekg(0, fstream::beg);//移动到文件头

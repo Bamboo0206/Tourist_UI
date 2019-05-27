@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">background-image:url(:/map.jpg)</string>
+     <string notr="true"/>
     </property>
     <property name="text">
      <string>map_picture</string>
@@ -118,19 +118,6 @@
      <string>退出系统</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
-    <property name="geometry">
-     <rect>
-      <x>540</x>
-      <y>480</y>
-      <width>121</width>
-      <height>101</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -138,7 +125,7 @@
      <x>0</x>
      <y>0</y>
      <width>1503</width>
-     <height>23</height>
+     <height>26</height>
     </rect>
    </property>
   </widget>

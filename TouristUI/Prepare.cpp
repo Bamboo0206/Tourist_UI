@@ -1,4 +1,5 @@
 ﻿#include"main.h"
+#include"welcomedlg.h"
 //准备函数，读取地图函数，读取航班表函数，时间线程函数
 
 /*全局变量*/
@@ -13,7 +14,10 @@ Status Prepare(void)
 		cout << "Called Prepare()" << endl;
 
 	//恢复上次关闭的系统
-	char ch;
+    WelcomeDlg wDlg;
+    if(wDlg.exec()==QDialog::Accepted)
+        cout <<"welcome dialog accepted\n";
+    /*char ch;
 	printf("是否恢复上次打开的系统？Y（打开旧系统）/N（打开新系统）\n");
 	scanf("%c", &ch);
 	while (ch != 'Y' && ch != 'N')
@@ -34,11 +38,11 @@ Status Prepare(void)
 		System_Time.month = 3;
 		System_Time.date = 23;
 		System_Time.hour = 0;
-	}
+    }*/
 
 	//读取地图
 	FILE *fmap;
-	fopen_s(&fmap, "map.txt", "r");
+    fopen_s(&fmap, "D:\\SourceCode\\Tourist_UI\\TouristUI\\map.txt", "r");
 	if (fmap == NULL)
 		cout << "Open file map.txt ERROR!" << endl;
 	else
@@ -50,7 +54,7 @@ Status Prepare(void)
 		}
 	}
 
-	fopen_s(&fptr_input, "User_input.txt", "w");
+    fopen_s(&fptr_input, "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_input.txt", "w");
 
 	//读取航班表
 	Read_trans_t();

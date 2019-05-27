@@ -40,7 +40,8 @@ SOURCES += \
     Prepare.cpp \
     Read_Trans_Table.cpp \
     Write_File.cpp \
-    changeuserinfodlg.cpp
+    changeuserinfodlg.cpp \
+    welcomedlg.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,7 +53,8 @@ HEADERS += \
     loginoptiondlg.h \
     printuserdlg.h \
     main.h \
-    changeuserinfodlg.h
+    changeuserinfodlg.h \
+    welcomedlg.h
 
 FORMS += \
         mainwindow.ui \
@@ -63,7 +65,8 @@ FORMS += \
     signupdlg.ui \
     loginoptiondlg.ui \
     printuserdlg.ui \
-    changeuserinfodlg.ui
+    changeuserinfodlg.ui \
+    welcomedlg.ui
 
 DISTFILES +=
 
