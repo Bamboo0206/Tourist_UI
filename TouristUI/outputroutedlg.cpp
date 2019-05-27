@@ -2,7 +2,7 @@
 #include "ui_outputroutedlg.h"
 #include"main.h"
 
-PASSENGER *Passengers = NULL, *Passengers_tailPtr = NULL, *User;//User当前系统使用者
+extern PASSENGER *Passengers , *Passengers_tailPtr , *User;//User当前系统使用者
 extern int Travelstate[10];
 extern COORDINATE coordinate[100/*城市数量*/];
 

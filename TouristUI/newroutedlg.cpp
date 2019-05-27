@@ -4,7 +4,7 @@
 #include"outputroutedlg.h"
 #include"main.h"
 
-PASSENGER *Passengers = NULL, *Passengers_tailPtr = NULL
+extern PASSENGER *Passengers , *Passengers_tailPtr 
         , *User;//User当前系统使用者
 
 newRouteDlg::newRouteDlg(QWidget *parent) :

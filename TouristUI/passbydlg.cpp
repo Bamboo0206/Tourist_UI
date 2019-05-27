@@ -5,7 +5,7 @@
 #include<QComboBox>
 #include"main.h"
 
-PASSENGER *Passengers = NULL, *Passengers_tailPtr = NULL, *User;//User当前系统使用者
+extern PASSENGER *Passengers , *Passengers_tailPtr , *User;//User当前系统使用者
 
 
 passbyDlg::passbyDlg(QWidget *parent) :

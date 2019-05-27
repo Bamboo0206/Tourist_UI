@@ -151,8 +151,8 @@ Status Min_Time();
 Status Min_Time_Limited_Time();
 Status Output_route(PATH tour);
 Status Finish_Path(PATH tour);
-Status Output_Status(PASSENGER *psg);
-void Change_User_Info(PASSENGER &psg);
+//Status Output_Status(PASSENGER *psg);
+//void Change_User_Info(PASSENGER &psg);
 Status Refresh(PASSENGER *tourist, int touristnum);
 
 void Write_status_file(PASSENGER &psg);
