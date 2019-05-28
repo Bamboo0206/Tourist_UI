@@ -11,7 +11,7 @@ extern GRAPH city_graph;
 
 #define Passengers_headPtr Passengers
 
-outputRouteDlg::outputRouteDlg(QWidget *parent/*, PATH tour*/) :
+outputRouteDlg::outputRouteDlg(QWidget *parent, PATH tour) :
     QDialog(parent),
     ui(new Ui::outputRouteDlg)
 {
@@ -64,18 +64,18 @@ void outputRouteDlg::on_start_btn_clicked()//开始旅行按钮
     User->red=rand()%256;
     User->green=rand()%256;
     User->blue=rand()%256;
-
+    User->
     /*加入passenger链表*/
     if (Passengers_headPtr == NULL)
-        {
-            Passengers_headPtr = User;
-            Passengers_tailPtr = User;
-        }
-        else
-        {
-            Passengers_tailPtr->next_passenger = User;
-            Passengers_tailPtr = Passengers_tailPtr->next_passenger;
-        }
+    {
+        Passengers_headPtr = User;
+        Passengers_tailPtr = User;
+    }
+    else
+    {
+        Passengers_tailPtr->next_passenger = User;
+        Passengers_tailPtr = Passengers_tailPtr->next_passenger;
+    }
 
     Write_user_file(1);//将用户注册信息写入User_File.ini
 
@@ -85,17 +85,17 @@ void outputRouteDlg::on_start_btn_clicked()//开始旅行按钮
 
 
     PASSENGER *temp = Passengers;
-        int touristnum = 0;
-        while (temp != NULL)
-        {
-            if (temp == User)
-                break;
-            else
-                touristnum ++;
+    int touristnum = 0;
+    while (temp != NULL)
+    {
+        if (temp == User)
+            break;
+        else
+            touristnum ++;
 
-            temp = temp->next_passenger;
-        }
-        Travelstate[touristnum] = 1;
+        temp = temp->next_passenger;
+    }
+    Travelstate[touristnum] = 1;
 
 
     /*刷新main的表格？*/
