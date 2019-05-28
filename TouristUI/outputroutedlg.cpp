@@ -1,14 +1,17 @@
 ﻿#include "outputroutedlg.h"
 #include "ui_outputroutedlg.h"
 #include"main.h"
+#include<string>
+#include<sstream>
 
 extern PASSENGER *Passengers , *Passengers_tailPtr , *User;//User当前系统使用者
 extern int Travelstate[10];
 extern COORDINATE coordinate[100/*城市数量*/];
+extern GRAPH city_graph;
 
 #define Passengers_headPtr Passengers
 
-outputRouteDlg::outputRouteDlg(QWidget *parent) :
+outputRouteDlg::outputRouteDlg(QWidget *parent, PATH tour) :
     QDialog(parent),
     ui(new Ui::outputRouteDlg)
 {
@@ -16,7 +19,34 @@ outputRouteDlg::outputRouteDlg(QWidget *parent) :
     cout<<"output Route"<<endl;
 
     /*输出路径*/
-    //ui->
+
+    int number = 0;
+        PATH temp = tour;
+
+        stringstream ss;
+
+        while (temp != NULL)
+        {
+            number++;
+            Ptr_trans_t_Node trans = city_graph.pp_G[temp->src][temp->dest].p_TransTable;
+            while (trans != NULL)
+            {
+                if (trans->number == temp->number)
+                    break;
+
+                trans = trans->nextPtr;
+            }
+
+            ss << "No." << number << " " << city_graph.City_Name[temp->src]
+                << "----->" << city_graph.City_Name[temp->dest] << " "
+                << trans->name << "  发车时间：" << temp->start_time.year << "-" << temp->start_time.month
+                << "-" << temp->start_time.date << " " << temp->start_time.hour << ":00:00" << "\t旅行时长:"
+                <<temp->time << '\n';
+
+            temp = temp->next;
+        }
+
+        ui->route->setText(QString::fromLocal8Bit(ss.str().c_str()));
 }
 
 outputRouteDlg::~outputRouteDlg()
