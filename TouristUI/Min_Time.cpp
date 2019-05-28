@@ -1,4 +1,5 @@
 ﻿#include"main.h"
+#include"outputroutedlg.h"
 
 int countP;
 extern GRAPH city_graph;
@@ -456,6 +457,14 @@ Status Min_Time()
 		<< "旅途总花费：" << Calculate_Cost(tour) << endl;
 
 	Output_route(tour);
+
+    //弹窗：输出路径
+    outputRouteDlg *oDlg=new outputRouteDlg(tour);
+    if(oDlg->exec()==QDialog::Accepted)
+    {
+        cout<<"outputRouteDlg accepted"<<endl;
+    }
+
 	Write_route_file(tour);
 
 	for (int i = 0; i < path_number; i++)

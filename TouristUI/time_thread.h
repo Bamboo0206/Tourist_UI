@@ -2,6 +2,7 @@
 #define TIME_THREAD_H
 
 #include "QObject"
+#include "QTimer"
 
 class QShow_Time: public QObject
 {
@@ -12,7 +13,7 @@ public:
     virtual ~QShow_Time();
 
 protected:
-    void timerEvent(QTimerEvent *event);
+    virtual void timerEvent(QTimerEvent *event);
     int TimerId;
 };
 

@@ -5,12 +5,15 @@
 #include <QElapsedTimer>
 #include <QApplication>
 #include "time_thread.h"
+#include "QDebug"
+//#include "QTimer"
 
 SYSTEM_TIME System_Time={2019, 5, 20, 0};
 extern bool Quit;
 extern GRAPH city_graph;
 extern PASSENGER *Passengers;
 bool inputing = false;
+extern MainWindow *MW;
 
 //假定最多10个旅客，缓存每个旅客的当前旅行到的第几个城市
 int Travelstate[10] = { 0 };
@@ -84,7 +87,10 @@ void time_thread()
 
 	}
 
-	/*写需要保存的系统状态*/
+    //MW->change_sysTime();
+    MW->paintEvent();
+
+    /*写需要保存的系统状态*/
     //Write_system_file();
 	//释放动态申请的内存
     //Freememory();

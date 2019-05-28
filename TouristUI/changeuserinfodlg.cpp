@@ -40,28 +40,27 @@ ChangeUserInfoDlg::~ChangeUserInfoDlg()
 void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
 {
 
-    PASSENGER psg=*User;
     //判断旅客是否到达终点
 
-    fprintf(fptr_input, "ID：%s  更改旅行计划\n", psg.ID);//用户输入写入input.txt文件
+    fprintf(fptr_input, "ID：%s  更改旅行计划\n", User->ID);//用户输入写入input.txt文件
 
 
     //判断旅客位置
-    if (psg.status.loca == STAY_IN_CITY)
+    if (User->status.loca == STAY_IN_CITY)
     {
-        psg.src = psg.status.src;/*修改起点为目前城市*/
-        psg.start_time = System_Time;
-        WritePrivateProfileSectionA(psg.ID, "", ".\\User_Route.ini");
+        User->src = User->status.src;/*修改起点为目前城市*/
+        User->start_time = System_Time;
+        WritePrivateProfileSectionA(User->ID, "", ".\\User_Route.ini");
     }
-    else if(psg.status.loca != ARRIVE)
+    else if(User->status.loca != ARRIVE)
     {
-        psg.src = psg.status.dest;
+        User->src = User->status.dest;
 
         PASSENGER *temp = Passengers;
         int touristnum = 0;
         while (temp != NULL)
         {
-            if (temp == &psg)
+            if (temp == User)
                 break;
 
             touristnum++;
@@ -72,23 +71,24 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
         sprintf(str1, "No.%d", Travelstate[touristnum]);
         PathNode cur;
 
-        GetPrivateProfileStructA(psg.ID, str1, &cur, sizeof(PathNode), ".\\User_Route.ini");
+        GetPrivateProfileStructA(User->ID, str1, &cur, sizeof(PathNode), ".\\User_Route.ini");
 
         int hours = cur.time-(System_Time-cur.start_time);
 
-        psg.start_time = System_Time + hours;
+        User->start_time = System_Time + hours;
 
-        WritePrivateProfileSectionA(psg.ID, "", ".\\User_Route.ini");
+        WritePrivateProfileSectionA(User->ID, "", ".\\User_Route.ini");
         memset(str1, 0, sizeof(str1));
         sprintf(str1, "No.1");
-        WritePrivateProfileStructA(psg.ID, str1, &cur, sizeof(PathNode), ".\\User_Route.ini");
+        WritePrivateProfileStructA(User->ID, str1, &cur, sizeof(PathNode), ".\\User_Route.ini");
 
         Travelstate[touristnum] = 1;
     }
     else
-        psg.src = psg.status.dest;
+        User->src = User->status.dest;
 
-    ui->src_lb->setText(QString::fromLocal8Bit(city_graph.City_Name[psg.src]));
+    cout<<"psg current location: "<<city_graph.City_Name[User->src]<<endl;
+    ui->src_lb->setText(QString::fromLocal8Bit(city_graph.City_Name[User->src]));
     ui->src_lb->show();
 
     /*获取各项输入*/
