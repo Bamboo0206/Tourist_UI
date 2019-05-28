@@ -24,7 +24,7 @@ outputRouteDlg::~outputRouteDlg()
 }
 
 
-void outputRouteDlg::on_start_btn_clicked()
+void outputRouteDlg::on_start_btn_clicked()//开始旅行按钮
 {
     /*修改qPath*/
     User->qPath=new QPainterPath;

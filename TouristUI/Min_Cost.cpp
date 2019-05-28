@@ -303,8 +303,9 @@ void Min_Cost()
         outputRouteDlg *oDlg=new outputRouteDlg(headptr);
         if(oDlg->exec()==QDialog::Accepted)
         {
-
+            cout<<"outputRouteDlg accepted"<<endl;
         }
+
 
 		Write_route_file(headptr);
 
