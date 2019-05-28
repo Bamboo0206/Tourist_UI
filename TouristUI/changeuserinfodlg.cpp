@@ -30,15 +30,6 @@ ChangeUserInfoDlg::ChangeUserInfoDlg(QWidget *parent) :
     <<QString::fromLocal8Bit(city_graph.City_Name[9]);
 
     ui->dest_cbx->addItems(cities);
-}
-
-ChangeUserInfoDlg::~ChangeUserInfoDlg()
-{
-    delete ui;
-}
-
-void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
-{
 
     //判断旅客是否到达终点
 
@@ -90,6 +81,67 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
     cout<<"psg current location: "<<city_graph.City_Name[User->src]<<endl;
     ui->src_lb->setText(QString::fromLocal8Bit(city_graph.City_Name[User->src]));
     ui->src_lb->show();
+}
+
+ChangeUserInfoDlg::~ChangeUserInfoDlg()
+{
+    delete ui;
+}
+
+void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
+{
+
+    //判断旅客是否到达终点
+
+    /*fprintf(fptr_input, "ID：%s  更改旅行计划\n", User->ID);//用户输入写入input.txt文件
+
+
+    //判断旅客位置
+    if (User->status.loca == STAY_IN_CITY)
+    {
+        User->src = User->status.src;//修改起点为目前城市
+        User->start_time = System_Time;
+        WritePrivateProfileSectionA(User->ID, "", ".\\User_Route.ini");
+    }
+    else if(User->status.loca != ARRIVE)
+    {
+        User->src = User->status.dest;
+
+        PASSENGER *temp = Passengers;
+        int touristnum = 0;
+        while (temp != NULL)
+        {
+            if (temp == User)
+                break;
+
+            touristnum++;
+            temp = temp->next_passenger;
+        }
+
+        char str1[10]={'\0'};
+        sprintf(str1, "No.%d", Travelstate[touristnum]);
+        PathNode cur;
+
+        GetPrivateProfileStructA(User->ID, str1, &cur, sizeof(PathNode), ".\\User_Route.ini");
+
+        int hours = cur.time-(System_Time-cur.start_time);
+
+        User->start_time = System_Time + hours;
+
+        WritePrivateProfileSectionA(User->ID, "", ".\\User_Route.ini");
+        memset(str1, 0, sizeof(str1));
+        sprintf(str1, "No.1");
+        WritePrivateProfileStructA(User->ID, str1, &cur, sizeof(PathNode), ".\\User_Route.ini");
+
+        Travelstate[touristnum] = 1;
+    }
+    else
+        User->src = User->status.dest;
+
+    cout<<"psg current location: "<<city_graph.City_Name[User->src]<<endl;
+    ui->src_lb->setText(QString::fromLocal8Bit(city_graph.City_Name[User->src]));
+    ui->src_lb->show();
+    */
 
     /*获取各项输入*/
 
