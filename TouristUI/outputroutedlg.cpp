@@ -16,7 +16,6 @@ outputRouteDlg::outputRouteDlg(QWidget *parent) :
     cout<<"output Route"<<endl;
 
     /*输出路径*/
-    //ui->
 }
 
 outputRouteDlg::~outputRouteDlg()

@@ -1,7 +1,7 @@
 ﻿#include "newroutedlg.h"
 #include "ui_newroutedlg.h"
 #include"passbydlg.h"
-#include"outputroutedlg.h"
+
 #include"main.h"
 
 extern PASSENGER *Passengers , *Passengers_tailPtr 
@@ -67,12 +67,9 @@ void newRouteDlg::on_pushButton_2_clicked()
             break;
         }
     cout<<"compute route done."<<endl;
-    //弹窗：输出路径
-    outputRouteDlg *oDlg=new outputRouteDlg;
-    if(oDlg->exec()==QDialog::Accepted)
-    {
-        accept();//退出newRoute窗口
-    }
+
+    accept();//退出newRoute窗口
+
 }
 
 void newRouteDlg::on_passby_btn_clicked()//弹窗 途经城市

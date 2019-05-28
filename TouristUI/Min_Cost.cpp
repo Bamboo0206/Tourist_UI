@@ -1,4 +1,5 @@
 ﻿#include"main.h"
+#include"outputroutedlg.h"
 
 /*全局变量定义  暂时放在这个文件里*/
 extern GRAPH city_graph;
@@ -46,7 +47,7 @@ void Init_Graph_MinCost()//遍历整个图，将其边初的权重始化
 */
 int Dijkstra_MinCost(const int src, const int dest, vector<int> &path)
 {
-    cout<<"Dijkstra_MinCost() called"<<endl;
+    //cout<<"Dijkstra_MinCost() called"<<endl;
 	/*初始化*/
 	/*bool collected[MAX_NODE_NUM] = { false };
 	int dist[MAX_NODE_NUM];*/
@@ -297,6 +298,14 @@ void Min_Cost()
 			<< "旅途总花费：" << Calculate_Cost(headptr) << endl;
 
 		Output_route(headptr);
+
+        //弹窗：输出路径
+        outputRouteDlg *oDlg=new outputRouteDlg(headptr);
+        if(oDlg->exec()==QDialog::Accepted)
+        {
+
+        }
+
 		Write_route_file(headptr);
 
 		/*释放链表*/

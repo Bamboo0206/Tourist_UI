@@ -39,6 +39,19 @@
     <string>开始</string>
    </property>
   </widget>
+  <widget class="QLabel" name="route">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>70</y>
+     <width>311</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
