@@ -52,10 +52,10 @@ MainWindow::MainWindow(QWidget *parent) :
     QShow_Time *show_time=new QShow_Time(this);
 
     /*添加定时器*/
-    //QTimer *timer=new QTimer(this);//声明一个定时器
+    QTimer *timer=new QTimer(this);//声明一个定时器
     //连接信号与槽
-    //connect(timer,SIGNAL(timeout()),this,SLOT(update()));//更新画图
-    //timer->start(1000);//每1000ms timeout一次，于是就update一次
+    connect(timer,SIGNAL(timeout()),this,SLOT(update()));//更新画图
+    timer->start(10000);//每1000ms timeout一次，于是就update一次
 
     cout<<"create MainWindow successfully"<<endl;
 }
@@ -122,9 +122,9 @@ void MainWindow::on_signUp_btn_clicked()//注册
                 ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(QString::fromLocal8Bit(city_graph.City_Name[User->status.src])));
                 break;
             case ARRIVE:
-                ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[4].c_str())));
+                /*ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[4].c_str())));
                 ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(QString::fromLocal8Bit(city_graph.City_Name[User->status.dest])));
-                break;
+                */break;
             default:
                 ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[(int)User->status.loca].c_str())));
                 string s1=city_graph.City_Name[User->status.src];
@@ -145,8 +145,8 @@ void MainWindow::on_signUp_btn_clicked()//注册
 }
 
 
-//void MainWindow::paintEvent(QPaintEvent *)
-void MainWindow::paintEvent()
+void MainWindow::paintEvent(QPaintEvent *)
+//void MainWindow::paintEvent()
 {
     cout<<"paintEvent() called"<<endl;
 
@@ -164,7 +164,6 @@ void MainWindow::paintEvent()
     {
         if(temp->qPath!=NULL)
         {
-            /*设置画笔颜色 随机数？不应该在这里随机？不然每次颜色不一样*/
             QPen pen;
             pen.setColor(QColor(temp->red, temp->green, temp->blue));//分量红、绿、蓝的值
             pen.setWidth(5);
@@ -181,6 +180,7 @@ void MainWindow::paintEvent()
 }
 void MainWindow::updatePath()
 {
+    cout <<"updatePath() called"<<endl;
     /*更新所有路径*/
     PASSENGER *temp=Passengers;
     while(temp!=NULL)
@@ -193,11 +193,11 @@ void MainWindow::updatePath()
             y=coordinate[CurrentCity].y;
             temp->qPath->lineTo((qreal)x,(qreal)y);
         }
-        else if(temp->status.loca==ARRIVE)//到达终点，删除路径
+        /*else if(temp->status.loca==ARRIVE)//到达终点，删除路径
         {
             delete temp->qPath;
             temp->qPath=NULL;
-        }
+        }*/
         else//途中
         {
             int src=temp->status.src;
@@ -256,6 +256,9 @@ void MainWindow::updateTable()//更新main里的表格
 {
     string loca[5] = { "IN_CAR", "IN_TRAIN", "IN_AIRPLANE", "STAY_IN_CITY" , "ARRIVE" };
     int RowCount=ui->allUser_tb->rowCount();
+
+    cout<<"updateTable() : main tabel Row count"<<RowCount<<endl;
+
     PASSENGER *temp=Passengers;
     int Row=0;
     while(temp!=NULL&&Row<RowCount)
@@ -286,4 +289,5 @@ void MainWindow::updateTable()//更新main里的表格
         Row++;
     }
     ui->allUser_tb->show();
+    cout<<"updateTable() done"<<endl;
 }

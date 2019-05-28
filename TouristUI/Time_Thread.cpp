@@ -88,7 +88,7 @@ void time_thread()
 	}
 
     //MW->change_sysTime();
-    MW->paintEvent();
+    //MW->paintEvent();
 
     /*写需要保存的系统状态*/
     //Write_system_file();
