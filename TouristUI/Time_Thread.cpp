@@ -4,6 +4,7 @@
 #include"mainwindow.h"
 #include <QElapsedTimer>
 #include <QApplication>
+#include "time_thread.h"
 
 SYSTEM_TIME System_Time={2019, 5, 20, 0};
 extern bool Quit;
@@ -13,6 +14,27 @@ bool inputing = false;
 
 //假定最多10个旅客，缓存每个旅客的当前旅行到的第几个城市
 int Travelstate[10] = { 0 };
+
+QShow_Time::QShow_Time(QObject *parent)
+    :QObject(parent)
+{
+    TimerId=startTimer(10000);
+}
+
+QShow_Time::~QShow_Time()
+{
+    if(TimerId!=0)
+        killTimer(TimerId);
+}
+
+void QShow_Time::timerEvent(QTimerEvent *event)
+{
+    time_thread();
+    qDebug()<<"Call time_thread!";
+}
+
+
+
 
 //unsigned __stdcall time_thread(void* pArguments)
 void time_thread()
@@ -77,7 +99,7 @@ void time_thread()
 
     //_endthreadex(0);
 
-	return 0;
+    //return 0;
 }
 
 bool operator<(const SYSTEM_TIME& A, const SYSTEM_TIME& B)
