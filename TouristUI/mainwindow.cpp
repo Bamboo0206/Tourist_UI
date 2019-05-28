@@ -111,11 +111,11 @@ void MainWindow::on_signUp_btn_clicked()//注册
             switch (User->status.loca) {
             case STAY_IN_CITY:
                 ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[3].c_str())));
-                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(tr(city_graph.City_Name[User->status.src])));
+                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(QString::fromLocal8Bit(city_graph.City_Name[User->status.src])));
                 break;
             case ARRIVE:
                 ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[4].c_str())));
-                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(tr(city_graph.City_Name[User->status.dest])));
+                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(QString::fromLocal8Bit(city_graph.City_Name[User->status.dest])));
                 break;
             default:
                 ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[(int)User->status.loca].c_str())));
@@ -123,12 +123,14 @@ void MainWindow::on_signUp_btn_clicked()//注册
                 string s2=city_graph.City_Name[User->status.dest];
                 string s3=" --> ";
                 string str=s1+s3+s2;
-                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(tr(str.c_str())));
+                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(QString::fromLocal8Bit(str.c_str())));
 
                 ui->allUser_tb->setItem(RowCount,3,new QTableWidgetItem(tr(User->status.name)));
                 break;
             }
 
+            ui->allUser_tb->show();
+            cout<<"add Row in main table done"<<endl;
         }
     }
     inputing=false;

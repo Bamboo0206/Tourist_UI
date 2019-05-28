@@ -73,12 +73,14 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
     }
     else
         psg.src = psg.status.dest;
+
     ui->src_lb->setText(tr(city_graph.City_Name[psg.src]));
+    ui->src_lb->show();
 
     /*获取各项输入*/
 
     User->dest = ui->dest_cbx->currentIndex();
-    User->strategy = ui->strategy_cbx->currentIndex();//???????0\1\2???
+    User->strategy = ui->strategy_cbx->currentIndex();//0/1/2
     if(User->strategy==2)
         User->Time_Limited = LimTime_le->text().toInt();
     else
@@ -99,7 +101,7 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
         default:
             break;
         }
-
+    cout<<"change route :compute route done."<<endl;
     //弹窗：输出路径
     outputRouteDlg *oDlg=new outputRouteDlg;
     if(oDlg->exec()==QDialog::Accepted)

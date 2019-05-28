@@ -11,7 +11,7 @@ extern GRAPH city_graph;
 
 #define Passengers_headPtr Passengers
 
-outputRouteDlg::outputRouteDlg(QWidget *parent, PATH tour) :
+outputRouteDlg::outputRouteDlg(QWidget *parent/*, PATH tour*/) :
     QDialog(parent),
     ui(new Ui::outputRouteDlg)
 {
@@ -20,7 +20,7 @@ outputRouteDlg::outputRouteDlg(QWidget *parent, PATH tour) :
 
     /*输出路径*/
 
-    int number = 0;
+/*    int number = 0;
         PATH temp = tour;
 
         stringstream ss;
@@ -47,7 +47,7 @@ outputRouteDlg::outputRouteDlg(QWidget *parent, PATH tour) :
         }
 
         ui->route->setText(QString::fromLocal8Bit(ss.str().c_str()));
-}
+*/}
 
 outputRouteDlg::~outputRouteDlg()
 {

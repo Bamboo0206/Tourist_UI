@@ -164,6 +164,8 @@ void Min_Cost()
 		vector<int> path(1);//0占位
 		path.at(0) = Dijkstra_MinCost(User->src, User->dest, path);
 
+        cout<<"min cost route found."<<endl;
+
 		/*待改：调用函数将结果写入文件？*/
 		/*改为链表*/
 		PATH headptr = NULL, currentptr=NULL, tailptr=NULL;
@@ -188,9 +190,20 @@ void Min_Cost()
 		}
 
 		//补全路线链表中的内容
-		Finish_Path(headptr);
+        Finish_Path(headptr);
+
+        cout << "旅途总时长：" << Calculate_Time(headptr) << endl
+            << "旅途总花费：" << Calculate_Cost(headptr) << endl;
 
 		Output_route(headptr);
+
+        //弹窗：输出路径
+        outputRouteDlg *oDlg=new outputRouteDlg;
+        if(oDlg->exec()==QDialog::Accepted)
+        {
+            cout<<"outputRouteDlg accepted"<<endl;
+        }
+
 		Write_route_file(headptr);
 
 		/*释放链表*/

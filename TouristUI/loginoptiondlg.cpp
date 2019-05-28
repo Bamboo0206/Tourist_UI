@@ -21,7 +21,7 @@ LoginOptionDlg::~LoginOptionDlg()
 void LoginOptionDlg::on_OKbtm_clicked()
 {
     /*获取combox里的信息并执行相关操作*/
-    int choice=ui->optionCbx->currentIndex();//0,1,2
+    int choice=ui->optionCbx->currentIndex();//0,1
 
 	if (choice == 0)
 	{
@@ -33,7 +33,7 @@ void LoginOptionDlg::on_OKbtm_clicked()
 	{
 		//旅客退出
 		Write_user_file(3);
-		User = NULL;
+        User = NULL;
 	}
 
     /*关闭*/

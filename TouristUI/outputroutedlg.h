@@ -12,7 +12,7 @@ class outputRouteDlg : public QDialog
     Q_OBJECT
 
 public:
-    explicit outputRouteDlg(QWidget *parent = 0);
+    explicit outputRouteDlg(QWidget *parent = 0/*, PATH tour*/);
     ~outputRouteDlg();
 
 private slots:
