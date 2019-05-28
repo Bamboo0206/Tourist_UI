@@ -5,7 +5,7 @@
 #include <QElapsedTimer>
 #include <QApplication>
 
-SYSTEM_TIME System_Time;
+SYSTEM_TIME System_Time={2019, 5, 20, 0};
 extern bool Quit;
 extern GRAPH city_graph;
 extern PASSENGER *Passengers;
@@ -14,16 +14,18 @@ bool inputing = false;
 //假定最多10个旅客，缓存每个旅客的当前旅行到的第几个城市
 int Travelstate[10] = { 0 };
 
-unsigned __stdcall time_thread(void* pArguments)
+//unsigned __stdcall time_thread(void* pArguments)
+void time_thread()
 {
-	while (Quit == false)
+    //while (Quit == false)
+        if (Quit == false)
 	{
         //????
-        QApplication::processEvents();
+        //QApplication::processEvents();
 
 		if (!inputing)
 		{
-			Sleep(10000);
+            Sleep(100000);
 			System_Time.hour++;
 			if (System_Time.hour == 24)
 			{
@@ -61,11 +63,20 @@ unsigned __stdcall time_thread(void* pArguments)
 	}
 
 	/*写需要保存的系统状态*/
-	Write_system_file();
+    //Write_system_file();
 	//释放动态申请的内存
-	Freememory();
+    //Freememory();
 
-	_endthreadex(0);
+    if(Quit==true)
+    {
+        /*写需要保存的系统状态*/
+        Write_system_file();
+        //释放动态申请的内存
+        Freememory();
+    }
+
+    //_endthreadex(0);
+
 	return 0;
 }
 

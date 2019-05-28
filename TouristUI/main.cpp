@@ -48,6 +48,7 @@ int main(int argc, char *argv[])
 
     w.initCoordinate();
     w.show();
+
     cout<<"MainWindow showed"<<endl;
     MW = &w;
 

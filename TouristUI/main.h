@@ -138,7 +138,8 @@ typedef struct pathnode
 
 /*函数声明*/
 //unsigned __stdcall mouse_thread(void* pArguments);
-unsigned __stdcall time_thread(void* pArguments);
+//unsigned __stdcall time_thread(void* pArguments);
+void time_thread();
 
 Status Prepare(void);
 Status Read_Map(FILE *fptr);
