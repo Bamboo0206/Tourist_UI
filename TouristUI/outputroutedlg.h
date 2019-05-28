@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include"main.h"
+
 namespace Ui {
 class outputRouteDlg;
 }
@@ -12,7 +14,7 @@ class outputRouteDlg : public QDialog
     Q_OBJECT
 
 public:
-    explicit outputRouteDlg(QWidget *parent = 0/*, PATH tour*/);
+    explicit outputRouteDlg(PATH tour,QWidget *parent = 0);
     ~outputRouteDlg();
 
 private slots:

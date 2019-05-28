@@ -11,7 +11,7 @@ extern GRAPH city_graph;
 
 #define Passengers_headPtr Passengers
 
-outputRouteDlg::outputRouteDlg(QWidget *parent/*, PATH tour*/) :
+outputRouteDlg::outputRouteDlg(PATH tour,QWidget *parent) :
     QDialog(parent),
     ui(new Ui::outputRouteDlg)
 {

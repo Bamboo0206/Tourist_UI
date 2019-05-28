@@ -198,7 +198,7 @@ void Min_Cost()
 		Output_route(headptr);
 
         //弹窗：输出路径
-        outputRouteDlg *oDlg=new outputRouteDlg;
+        outputRouteDlg *oDlg=new outputRouteDlg(headptr);
         if(oDlg->exec()==QDialog::Accepted)
         {
             cout<<"outputRouteDlg accepted"<<endl;
@@ -313,7 +313,7 @@ void Min_Cost()
 		Output_route(headptr);
 
         //弹窗：输出路径
-        outputRouteDlg *oDlg=new outputRouteDlg;
+        outputRouteDlg *oDlg=new outputRouteDlg(headptr);
         if(oDlg->exec()==QDialog::Accepted)
         {
             cout<<"outputRouteDlg accepted"<<endl;

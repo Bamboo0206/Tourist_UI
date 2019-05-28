@@ -36,22 +36,28 @@ int main(int argc, char *argv[])
     cout<<"创建mouse_thread线程和time_thread线程"<<endl;
 
     //创建mouse_thread线程和time_thread线程
-    HANDLE Time_Thread = (HANDLE)_beginthreadex(NULL, 0, time_thread, NULL, 0, NULL);
+    //HANDLE Time_Thread = (HANDLE)_beginthreadex(NULL, 0, time_thread, NULL, 0, NULL);
     //命令行版本
-    HANDLE mouse_thread = (HANDLE)_beginthreadex(NULL, 0, window_thread, NULL, 0, NULL);
+    //HANDLE mouse_thread = (HANDLE)_beginthreadex(NULL, 0, window_thread, NULL, 0, NULL);
 
     cout<<"创建mouse_thread线程和time_thread线程完成"<<endl;
 
 
+    MainWindow w;
+    //MW指针用于关闭mainwindow
 
+    w.initCoordinate();
+    w.show();
+    cout<<"MainWindow showed"<<endl;
+    MW = &w;
 
 
     //等待线程关闭信号，退出线程
-    WaitForSingleObject(mouse_thread, MY_INFINITE);
-    CloseHandle(mouse_thread);
+    //WaitForSingleObject(mouse_thread, MY_INFINITE);
+    //CloseHandle(mouse_thread);
     //等待线程关闭信号，退出线程
-    WaitForSingleObject(Time_Thread, MY_INFINITE);
-    CloseHandle(Time_Thread);
+    //WaitForSingleObject(Time_Thread, MY_INFINITE);
+    //CloseHandle(Time_Thread);
 
     return a.exec();
 }

@@ -103,11 +103,11 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
         }
     cout<<"change route :compute route done."<<endl;
     //弹窗：输出路径
-    outputRouteDlg *oDlg=new outputRouteDlg;
+    /*outputRouteDlg *oDlg=new outputRouteDlg();
     if(oDlg->exec()==QDialog::Accepted)
     {
         accept();//退出ChangeUserInfoDlg窗口
-    }
+    }*/
 }
 
 void ChangeUserInfoDlg::on_strategy_cbx_currentIndexChanged(int index)
