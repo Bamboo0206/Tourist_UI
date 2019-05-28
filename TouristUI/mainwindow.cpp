@@ -49,13 +49,13 @@ MainWindow::MainWindow(QWidget *parent) :
                 <<QStringList()<<QString::fromLocal8Bit("班次"));
     ui->allUser_tb->setEditTriggers(QAbstractItemView::NoEditTriggers);//禁止修改
 
-    QShow_Time *show_time=new QShow_Time(this);
+    //QShow_Time *show_time=new QShow_Time(this);
 
     /*添加定时器*/
     QTimer *timer=new QTimer(this);//声明一个定时器
     //连接信号与槽
     connect(timer,SIGNAL(timeout()),this,SLOT(update()));//更新画图
-    timer->start(10000);//每1000ms timeout一次，于是就update一次
+    timer->start(30000);//每1000ms timeout一次，于是就update一次
 
     cout<<"create MainWindow successfully"<<endl;
 }
@@ -79,6 +79,8 @@ void MainWindow::on_signIn_btn_clicked()//登陆
         }
     }
     /*刷新main里的表格？？？？？？*/
+    updateTable();
+
     inputing=false;
 }
 
@@ -250,6 +252,7 @@ void MainWindow::change_sysTime()
     sprintf(t,"%d-%d-%d****%d:00:00",
            System_Time.year, System_Time.month, System_Time.date, System_Time.hour);
     ui->SysTime_lb->setText(t);//打印系统时间
+    ui->SysTime_lb->show();
 }
 
 void MainWindow::updateTable()//更新main里的表格
