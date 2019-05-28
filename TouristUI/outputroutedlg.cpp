@@ -21,32 +21,32 @@ outputRouteDlg::outputRouteDlg(QWidget *parent, PATH tour) :
     /*输出路径*/
 
     int number = 0;
-        PATH temp = tour;
+    PATH temp = tour;
 
-        stringstream ss;
+    stringstream ss;
 
-        while (temp != NULL)
+    while (temp != NULL)
+    {
+        number++;
+        Ptr_trans_t_Node trans = city_graph.pp_G[temp->src][temp->dest].p_TransTable;
+        while (trans != NULL)
         {
-            number++;
-            Ptr_trans_t_Node trans = city_graph.pp_G[temp->src][temp->dest].p_TransTable;
-            while (trans != NULL)
-            {
-                if (trans->number == temp->number)
-                    break;
+            if (trans->number == temp->number)
+                break;
 
-                trans = trans->nextPtr;
-            }
-
-            ss << "No." << number << " " << city_graph.City_Name[temp->src]
-                << "----->" << city_graph.City_Name[temp->dest] << " "
-                << trans->name << "  发车时间：" << temp->start_time.year << "-" << temp->start_time.month
-                << "-" << temp->start_time.date << " " << temp->start_time.hour << ":00:00" << "\t旅行时长:"
-                <<temp->time << '\n';
-
-            temp = temp->next;
+            trans = trans->nextPtr;
         }
 
-        ui->route->setText(QString::fromLocal8Bit(ss.str().c_str()));
+        ss << "No." << number << " " << city_graph.City_Name[temp->src]
+            << "----->" << city_graph.City_Name[temp->dest] << " "
+            << trans->name << "  发车时间：" << temp->start_time.year << "-" << temp->start_time.month
+            << "-" << temp->start_time.date << " " << temp->start_time.hour << ":00:00" << "\t旅行时长:"
+            <<temp->time << '\n';
+
+        temp = temp->next;
+    }
+
+    ui->route->setText(QString::fromLocal8Bit(ss.str().c_str()));
 }
 
 outputRouteDlg::~outputRouteDlg()
