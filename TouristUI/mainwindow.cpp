@@ -83,6 +83,8 @@ void MainWindow::on_signUp_btn_clicked()//注册
         newRouteDlg nDlg(this);//新建一个窗口（对象），并等待返回值
         if(nDlg.exec()==QDialog::Accepted)
         {
+            cout<<"newRout Dialog accepted"<<endl;
+
             //初始化用户状态，用于输出
             PASSENGER *temp=Passengers;
             int touristnum=0;
