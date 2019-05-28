@@ -125,26 +125,6 @@
      <height>22</height>
     </rect>
    </property>
-   <item>
-    <property name="text">
-     <string>北京</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>天津</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>西安</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>上海</string>
-    </property>
-   </item>
   </widget>
   <widget class="QLineEdit" name="cityNum_lineEdit">
    <property name="geometry">

@@ -16,6 +16,20 @@ ChangeUserInfoDlg::ChangeUserInfoDlg(QWidget *parent) :
     ui(new Ui::ChangeUserInfoDlg)
 {
     ui->setupUi(this);
+
+    QStringList cities = QStringList()
+    <<QString::fromLocal8Bit(city_graph.City_Name[0])
+    <<QString::fromLocal8Bit(city_graph.City_Name[1])
+    <<QString::fromLocal8Bit(city_graph.City_Name[2])
+    <<QString::fromLocal8Bit(city_graph.City_Name[3])
+    <<QString::fromLocal8Bit(city_graph.City_Name[4])
+    <<QString::fromLocal8Bit(city_graph.City_Name[5])
+    <<QString::fromLocal8Bit(city_graph.City_Name[6])
+    <<QString::fromLocal8Bit(city_graph.City_Name[7])
+    <<QString::fromLocal8Bit(city_graph.City_Name[8])
+    <<QString::fromLocal8Bit(city_graph.City_Name[9]);
+
+    ui->dest_cbx->addItems(cities);
 }
 
 ChangeUserInfoDlg::~ChangeUserInfoDlg()
@@ -74,7 +88,7 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
     else
         psg.src = psg.status.dest;
 
-    ui->src_lb->setText(tr(city_graph.City_Name[psg.src]));
+    ui->src_lb->setText(QString::fromLocal8Bit(city_graph.City_Name[psg.src]));
     ui->src_lb->show();
 
     /*获取各项输入*/
@@ -102,12 +116,7 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
             break;
         }
     cout<<"change route :compute route done."<<endl;
-    //弹窗：输出路径
-    /*outputRouteDlg *oDlg=new outputRouteDlg();
-    if(oDlg->exec()==QDialog::Accepted)
-    {
-        accept();//退出ChangeUserInfoDlg窗口
-    }*/
+    accept();//退出change route窗口
 }
 
 void ChangeUserInfoDlg::on_strategy_cbx_currentIndexChanged(int index)

@@ -69,8 +69,12 @@ void MainWindow::on_signIn_btn_clicked()//登陆
     {
         /*显示选择操作的窗口*/
         LoginOptionDlg *loDlg=new LoginOptionDlg(this);
-        loDlg->show();
+        if(loDlg->exec()==QDialog::Accepted)
+        {
+            cout<<"Login Option Dlg Accepted"<<endl;
+        }
     }
+    /*刷新main里的表格？？？？？？*/
     inputing=false;
 }
 
@@ -270,5 +274,7 @@ void MainWindow::updateTable()//更新main里的表格
             ui->allUser_tb->setItem(RowCount,3,new QTableWidgetItem(tr(User->status.name)));
             break;
         }
+        Row++;
     }
+    ui->allUser_tb->show();
 }

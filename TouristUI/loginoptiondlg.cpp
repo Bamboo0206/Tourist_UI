@@ -27,15 +27,19 @@ void LoginOptionDlg::on_OKbtm_clicked()
 	{
 		//调用调整旅行方案的函数
 		ChangeUserInfoDlg *cDlg = new ChangeUserInfoDlg(this);
-		cDlg->show();
+        if(cDlg->exec()==QDialog::Accepted)
+        {
+            /*关闭*/
+            accept();
+        }
 	}
 	else
 	{
 		//旅客退出
 		Write_user_file(3);
         User = NULL;
-	}
 
-    /*关闭*/
-    accept();
+        /*关闭*/
+        accept();
+	}
 }

@@ -77,7 +77,7 @@ void time_thread()
 
     //_endthreadex(0);
 
-	return 0;
+    //return 0;
 }
 
 bool operator<(const SYSTEM_TIME& A, const SYSTEM_TIME& B)

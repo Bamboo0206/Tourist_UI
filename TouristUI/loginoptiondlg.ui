@@ -29,12 +29,7 @@
    </item>
    <item>
     <property name="text">
-     <string>新建项目</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>新建项目2</string>
+     <string>退出登陆</string>
     </property>
    </item>
   </widget>
