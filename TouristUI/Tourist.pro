@@ -54,7 +54,8 @@ HEADERS += \
     printuserdlg.h \
     main.h \
     changeuserinfodlg.h \
-    welcomedlg.h
+    welcomedlg.h \
+    time_thread.h
 
 FORMS += \
         mainwindow.ui \

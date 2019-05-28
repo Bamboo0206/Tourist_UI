@@ -11,6 +11,7 @@
 #include <QtGui>
 #include <vector>
 #include "main.h"
+#include "time_thread.h"
 
 extern bool inputing;
 extern bool Quit;
@@ -46,6 +47,8 @@ MainWindow::MainWindow(QWidget *parent) :
                 <<QStringList()<<QString::fromLocal8Bit("所在地")
                 <<QStringList()<<QString::fromLocal8Bit("班次"));
     ui->allUser_tb->setEditTriggers(QAbstractItemView::NoEditTriggers);//禁止修改
+
+    QShow_Time *showtime=new QShow_Time(this);
 
     /*添加定时器*/
     QTimer *timer=new QTimer(this);//声明一个定时器
