@@ -9,7 +9,7 @@ bool Quit = false;
 extern SYSTEM_TIME System_Time;
 extern MainWindow *MW;
 
-unsigned __stdcall window_thread(void* pArguments)
+/*unsigned __stdcall window_thread(void* pArguments)
 {
     MainWindow w;
     //MW指针用于关闭mainwindow
@@ -22,6 +22,18 @@ unsigned __stdcall window_thread(void* pArguments)
 
     _endthreadex(0);
     return 0;
+}*/
+void createMainWindow()
+{
+    MainWindow w;
+    //MW指针用于关闭mainwindow
+
+    w.initCoordinate();
+    w.show();
+
+    cout<<"MainWindow showed"<<endl;
+    MW = &w;
+
 }
 
 int main(int argc, char *argv[])
@@ -39,6 +51,13 @@ int main(int argc, char *argv[])
     //HANDLE Time_Thread = (HANDLE)_beginthreadex(NULL, 0, time_thread, NULL, 0, NULL);
     //命令行版本
     //HANDLE mouse_thread = (HANDLE)_beginthreadex(NULL, 0, window_thread, NULL, 0, NULL);
+
+    /*创建线程*/
+    thread t(time_thread);
+    t.detach();
+
+    /*thread mT(createMainWindow);
+    mT.join();*/
 
     cout<<"创建mouse_thread线程和time_thread线程完成"<<endl;
 

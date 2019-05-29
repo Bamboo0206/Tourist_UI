@@ -23,11 +23,15 @@ extern int Travelstate[10];
 
 MainWindow *MW;
 COORDINATE coordinate[100/*城市数量*/];
+mutex myMutex;//线程锁
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    /*线程加锁*/
+    //lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+
     cout<<"creating MainWindow"<<endl;
     ui->setupUi(this);
 
@@ -49,24 +53,30 @@ MainWindow::MainWindow(QWidget *parent) :
                 <<QStringList()<<QString::fromLocal8Bit("班次"));
     ui->allUser_tb->setEditTriggers(QAbstractItemView::NoEditTriggers);//禁止修改
 
-    QShow_Time *show_time=new QShow_Time(this);
+    //QShow_Time *show_time=new QShow_Time(this);
 
     /*添加定时器*/
-    QTimer *timer=new QTimer(this);//声明一个定时器
+   /* QTimer *timer=new QTimer(this);//声明一个定时器
     //连接信号与槽
-    //connect(timer,SIGNAL(timeout()),this,SLOT(update()));//更新画图
-    //timer->start(30000);//每1000ms timeout一次，于是就update一次
-
+    connect(timer,SIGNAL(timeout()),this,SLOT(update()));//更新画图
+    timer->start(3000);//每1000ms timeout一次，于是就update一次
+*/
     cout<<"create MainWindow successfully"<<endl;
 }
 
 MainWindow::~MainWindow()
 {
+    /*线程加锁*/
+    lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+
     delete ui;
 }
 
 void MainWindow::on_signIn_btn_clicked()//登陆
 {
+    /*线程加锁*/
+    lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+
     inputing=true;
     LoginDlg *lDlg=new LoginDlg(this);
     if(lDlg->exec()==QDialog::Accepted)
@@ -86,6 +96,9 @@ void MainWindow::on_signIn_btn_clicked()//登陆
 
 void MainWindow::on_signUp_btn_clicked()//注册
 {
+    /*线程加锁*/
+    lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+
     inputing=true;
     SignupDlg *sDlg=new SignupDlg(this);
     if(sDlg->exec()==QDialog::Accepted)
@@ -103,6 +116,7 @@ void MainWindow::on_signUp_btn_clicked()//注册
                 temp=temp->next_passenger;
                 touristnum++;
             }
+            Travelstate[touristnum]=1;
             Refresh(User, touristnum);
 
             /*在mainWindow界面里的表格里增加一行*/
@@ -120,8 +134,8 @@ void MainWindow::on_signUp_btn_clicked()//注册
 
             switch (User->status.loca) {
             case STAY_IN_CITY:
-                ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[3].c_str())));
-                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(QString::fromLocal8Bit(city_graph.City_Name[User->status.src])));
+                ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[3].c_str())));//状态
+                ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(QString::fromLocal8Bit(city_graph.City_Name[User->status.src])));//地点
                 break;
             case ARRIVE:
                 /*ui->allUser_tb->setItem(RowCount,1,new QTableWidgetItem(tr(loca[4].c_str())));
@@ -148,75 +162,85 @@ void MainWindow::on_signUp_btn_clicked()//注册
 
 
 //void MainWindow::paintEvent(QPaintEvent *)
-void MainWindow::paintEvent()
-{
-    cout<<"paintEvent() called"<<endl;
+////void MainWindow::paintEvent()
+//{
 
-    //time_thread();
+//    /*线程加锁*///???????
+//    lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
 
-    /*刷新路径*/
-    //updatePath();
-    /*刷新时间*/
-    //change_sysTime();
+//    cout<<"paintEvent() called"<<endl;
 
-    /*画出所有路径*/
-    QPainter painter(this);
-    PASSENGER *temp=Passengers;
-    while(temp!=NULL)
-    {
-        if(temp->qPath!=NULL)
-        {
-            QPen pen;
-            pen.setColor(QColor(temp->red, temp->green, temp->blue));//分量红、绿、蓝的值
-            pen.setWidth(5);
-            painter.setPen(pen); //添加画笔
+//    //time_thread();
 
-            /*画图*/
-            painter.save();
-            painter.drawPath(*(temp->qPath));
-            painter.restore();
-        }
-        temp=temp->next_passenger;
-    }
+//    /*刷新路径*/
+//    //updatePath();
+//    /*刷新时间*/
+//    //change_sysTime();
 
-}
+//    /*画出所有路径*/
+//    QPainter painter(this);
+//    PASSENGER *temp=Passengers;
+//    while(temp!=NULL)
+//    {
+//        if(temp->qPath!=NULL)
+//        {
+//            QPen pen;
+//            pen.setColor(QColor(temp->red, temp->green, temp->blue));//分量红、绿、蓝的值
+//            pen.setWidth(5);
+//            painter.setPen(pen); //添加画笔
+
+//            /*画图*/
+//            painter.save();
+//            painter.drawPath(*(temp->qPath));
+//            painter.restore();
+//        }
+//        temp=temp->next_passenger;
+//    }
+
+//}
 void MainWindow::updatePath()
 {
-    cout <<"updatePath() called"<<endl;
-    /*更新所有路径*/
-    PASSENGER *temp=Passengers;
-    while(temp!=NULL)
-    {
-        if(temp->status.loca==STAY_IN_CITY)
-        {
-            int CurrentCity=temp->status.src;
-            int x,y;
-            x=coordinate[CurrentCity].x;
-            y=coordinate[CurrentCity].y;
-            temp->qPath->lineTo((qreal)x,(qreal)y);
-        }
-        /*else if(temp->status.loca==ARRIVE)//到达终点，删除路径
-        {
-            delete temp->qPath;
-            temp->qPath=NULL;
-        }*/
-        else//途中
-        {
-            int src=temp->status.src;
-            int dest=temp->status.dest;
-            /*取src\dest中点*/
-            int x,y;
-            x=(coordinate[src].x+coordinate[dest].x)/2;
-            y=(coordinate[src].y+coordinate[dest].y)/2;
-            temp->qPath->lineTo((qreal)x,(qreal)y);
-        }
+//    /*线程加锁*/
+//    //lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
 
-        temp=temp->next_passenger;
-    }
+//    cout <<"updatePath() called"<<endl;
+//    /*更新所有路径*/
+//    PASSENGER *temp=Passengers;
+//    while(temp!=NULL)
+//    {
+//        if(temp->status.loca==STAY_IN_CITY)
+//        {
+//            int CurrentCity=temp->status.src;
+//            int x,y;
+//            x=coordinate[CurrentCity].x;
+//            y=coordinate[CurrentCity].y;
+//            temp->qPath->lineTo((qreal)x,(qreal)y);
+//        }
+//        /*else if(temp->status.loca==ARRIVE)//到达终点，删除路径
+//        {
+//            delete temp->qPath;
+//            temp->qPath=NULL;
+//        }*/
+//        else//途中
+//        {
+//            int src=temp->status.src;
+//            int dest=temp->status.dest;
+//            /*取src\dest中点*/
+//            int x,y;
+//            x=(coordinate[src].x+coordinate[dest].x)/2;
+//            y=(coordinate[src].y+coordinate[dest].y)/2;
+//            temp->qPath->lineTo((qreal)x,(qreal)y);
+//        }
+
+//        temp=temp->next_passenger;
+//    }
 }
 
 void MainWindow::initCoordinate()//初始化每个城市的坐标
 {
+    /*线程加锁*/
+    //lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+
     coordinate[0].x=780;
     coordinate[0].y=339;
     coordinate[1].x=793;
@@ -242,12 +266,18 @@ void MainWindow::initCoordinate()//初始化每个城市的坐标
 
 void MainWindow::on_exitSys_btn_clicked()
 {
+    /*线程加锁*/
+    //lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+
     Quit=true;
     MW->close();
 }
 
 void MainWindow::change_sysTime()
 {
+    /*线程加锁*/
+    //lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+
     char t[100];
     sprintf(t,"%d-%d-%d****%d:00:00",
            System_Time.year, System_Time.month, System_Time.date, System_Time.hour);
@@ -257,6 +287,9 @@ void MainWindow::change_sysTime()
 
 void MainWindow::updateTable()//更新main里的表格
 {
+    /*线程加锁*/
+    //lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+
     string loca[5] = { "IN_CAR", "IN_TRAIN", "IN_AIRPLANE", "STAY_IN_CITY" , "ARRIVE" };
     int RowCount=ui->allUser_tb->rowCount();
 

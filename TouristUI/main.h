@@ -13,6 +13,7 @@
 #include<algorithm>
 #include<iterator>
 #include<fstream>
+#include<thread>//c++的多线程
 using namespace std;
 
 #include<QDebug>
