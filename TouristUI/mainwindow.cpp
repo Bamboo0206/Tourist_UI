@@ -49,13 +49,13 @@ MainWindow::MainWindow(QWidget *parent) :
                 <<QStringList()<<QString::fromLocal8Bit("班次"));
     ui->allUser_tb->setEditTriggers(QAbstractItemView::NoEditTriggers);//禁止修改
 
-    //QShow_Time *show_time=new QShow_Time(this);
+    QShow_Time *show_time=new QShow_Time(this);
 
     /*添加定时器*/
     QTimer *timer=new QTimer(this);//声明一个定时器
     //连接信号与槽
-    connect(timer,SIGNAL(timeout()),this,SLOT(update()));//更新画图
-    timer->start(30000);//每1000ms timeout一次，于是就update一次
+    //connect(timer,SIGNAL(timeout()),this,SLOT(update()));//更新画图
+    //timer->start(30000);//每1000ms timeout一次，于是就update一次
 
     cout<<"create MainWindow successfully"<<endl;
 }
@@ -147,17 +147,17 @@ void MainWindow::on_signUp_btn_clicked()//注册
 }
 
 
-void MainWindow::paintEvent(QPaintEvent *)
-//void MainWindow::paintEvent()
+//void MainWindow::paintEvent(QPaintEvent *)
+void MainWindow::paintEvent()
 {
     cout<<"paintEvent() called"<<endl;
 
     //time_thread();
 
     /*刷新路径*/
-    updatePath();
+    //updatePath();
     /*刷新时间*/
-    change_sysTime();
+    //change_sysTime();
 
     /*画出所有路径*/
     QPainter painter(this);

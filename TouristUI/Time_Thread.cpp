@@ -5,6 +5,7 @@
 #include <QElapsedTimer>
 #include <QApplication>
 #include "time_thread.h"
+#include"mainwindow.h"
 #include "QDebug"
 //#include "QTimer"
 
@@ -33,6 +34,7 @@ QShow_Time::~QShow_Time()
 void QShow_Time::timerEvent(QTimerEvent *event)
 {
     time_thread();
+    MW->paintEvent();
     qDebug()<<"Call time_thread!";
 }
 
@@ -86,6 +88,11 @@ void time_thread()
 		}
 
 	}
+
+        /*刷新路径*/
+        MW->updatePath();
+        /*刷新时间*/
+        MW->change_sysTime();
 
     //MW->change_sysTime();
     //MW->paintEvent();
