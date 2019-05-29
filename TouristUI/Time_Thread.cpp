@@ -195,9 +195,9 @@ int operator-(const SYSTEM_TIME& A, const SYSTEM_TIME& B)
 //刷新旅客状态
 Status Refresh(PASSENGER *tourist, int touristnum)
 {
-    cout<<"Refresh() called";
+    cout<<"Refresh() called"<<endl;
 	PathNode cur;
-	char filename[20] = { ".\\User_Route.ini" };
+    char filename[100] = { "D:\\SourceCode\\Tourist_UI\\TouristUI\\User_Route.ini" };
 	char str1[100];
 	bool RefreshOK = false;
 
