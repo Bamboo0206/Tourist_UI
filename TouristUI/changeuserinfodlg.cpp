@@ -76,7 +76,10 @@ ChangeUserInfoDlg::ChangeUserInfoDlg(QWidget *parent) :
         Travelstate[touristnum] = 1;
     }
     else
+    {
         User->src = User->status.dest;
+        User->start_time=System_Time;
+    }
 
     cout<<"psg current location: "<<city_graph.City_Name[User->src]<<endl;
     ui->src_lb->setText(QString::fromLocal8Bit(city_graph.City_Name[User->src]));

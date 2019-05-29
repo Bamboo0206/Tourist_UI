@@ -15,6 +15,7 @@ extern GRAPH city_graph;
 extern PASSENGER *Passengers;
 bool inputing = false;
 extern MainWindow *MW;
+extern mutex myMutex;//线程锁
 
 //假定最多10个旅客，缓存每个旅客的当前旅行到的第几个城市
 int Travelstate[10] = { 0 };
@@ -34,7 +35,7 @@ QShow_Time::~QShow_Time()
 void QShow_Time::timerEvent(QTimerEvent *event)
 {
     time_thread();
-    MW->paintEvent();
+    //MW->paintEvent();
     qDebug()<<"Call time_thread!";
 }
 
@@ -44,15 +45,21 @@ void QShow_Time::timerEvent(QTimerEvent *event)
 //unsigned __stdcall time_thread(void* pArguments)
 void time_thread()
 {
-    //while (Quit == false)
-        if (Quit == false)
+
+    while (Quit == false)
+        //if (Quit == false)
 	{
         //????
         //QApplication::processEvents();
 
+
+
 		if (!inputing)
 		{
-            Sleep(100000);
+            /*线程加锁*/
+            //lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+            qDebug()<<"looping: time_thread() updating";
+            Sleep(1000);
 			System_Time.hour++;
 			if (System_Time.hour == 24)
 			{
@@ -85,10 +92,11 @@ void time_thread()
 		else if (inputing)
 		{
 			Sleep(500);//休眠0.5s
+            qDebug()<<"looping: time_thread() pause";
 		}
 
-	}
 
+        //}
 
         if(!inputing)
         {
@@ -113,6 +121,8 @@ void time_thread()
         Write_system_file();
         //释放动态申请的内存
         Freememory();
+        return;//???
+    }
     }
 
     //_endthreadex(0);
@@ -169,6 +179,7 @@ int operator-(const SYSTEM_TIME& A, const SYSTEM_TIME& B)
 //刷新旅客状态
 Status Refresh(PASSENGER *tourist, int touristnum)
 {
+    cout<<"Refresh() called";
 	PathNode cur;
 	char filename[20] = { ".\\User_Route.ini" };
 	char str1[100];

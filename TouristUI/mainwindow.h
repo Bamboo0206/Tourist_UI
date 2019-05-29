@@ -26,7 +26,7 @@ public:
     void updatePath();/*更新所有路径*/
     void updateTable();
 
-    void paintEvent();
+    //void paintEvent();
 protected:
     //void paintEvent(QPaintEvent *);
 private slots:
