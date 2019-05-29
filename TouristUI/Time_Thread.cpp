@@ -89,10 +89,15 @@ void time_thread()
 
 	}
 
-        /*刷新路径*/
-        MW->updatePath();
-        /*刷新时间*/
-        MW->change_sysTime();
+
+        if(!inputing)
+        {
+            /*刷新路径*/
+            MW->updatePath();
+            /*刷新时间*/
+            MW->change_sysTime();
+        }
+
 
     //MW->change_sysTime();
     //MW->paintEvent();
