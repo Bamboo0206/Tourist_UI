@@ -47,6 +47,8 @@ outputRouteDlg::outputRouteDlg(PATH tour,QWidget *parent) :
     }
 
     ui->route->setText(QString::fromLocal8Bit(ss.str().c_str()));
+
+
 }
 
 outputRouteDlg::~outputRouteDlg()
