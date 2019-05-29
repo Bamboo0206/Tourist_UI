@@ -7,6 +7,7 @@
 extern PASSENGER *Passengers , *Passengers_tailPtr 
         , *User;//User当前系统使用者
 extern GRAPH city_graph;
+extern SYSTEM_TIME System_Time;
 
 newRouteDlg::newRouteDlg(QWidget *parent) :
     QDialog(parent),
@@ -48,6 +49,7 @@ void newRouteDlg::on_pushButton_2_clicked()
         User->Time_Limited = LimTime_le->text().toInt();
     else
         User->Time_Limited= NULL;
+    User->start_time=System_Time;
     cout<<User->src<<User->dest<<User->strategy<<endl;
 
 

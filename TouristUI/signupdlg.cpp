@@ -3,8 +3,10 @@
 #include"newroutedlg.h"
 #include<QMessageBox>
 #include"main.h"
+
 PASSENGER *Passengers = NULL, *Passengers_tailPtr = NULL, *User;//User当前系统使用者
 
+#define Passengers_headPtr Passengers
 
 SignupDlg::SignupDlg(QWidget *parent) :
     QDialog(parent),
@@ -30,6 +32,19 @@ void SignupDlg::on_signUp_btn_clicked()//注册按钮被按下
     /*新建用户*/
     User = new PASSENGER;
     User->next_passenger=NULL;
+
+    /*加入passenger链表*/
+    if (Passengers_headPtr == NULL)
+        {
+            Passengers_headPtr = User;
+            Passengers_tailPtr = User;
+        }
+        else
+        {
+            Passengers_tailPtr->next_passenger = User;
+            Passengers_tailPtr = Passengers_tailPtr->next_passenger;
+        }
+
     strcpy(User->ID, ui->userName_lineEdit->text().toLatin1().data());//输入用户名
 
     accept();

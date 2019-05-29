@@ -289,6 +289,8 @@ void MainWindow::updateTable()//更新main里的表格
             ui->allUser_tb->setItem(RowCount,3,new QTableWidgetItem(tr(User->status.name)));
             break;
         }
+
+        temp=temp->next_passenger;
         Row++;
     }
     ui->allUser_tb->show();

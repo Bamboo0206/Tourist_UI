@@ -65,17 +65,7 @@ void outputRouteDlg::on_start_btn_clicked()//开始旅行按钮
     User->green=rand()%256;
     User->blue=rand()%256;
 
-    /*加入passenger链表*/
-    if (Passengers_headPtr == NULL)
-        {
-            Passengers_headPtr = User;
-            Passengers_tailPtr = User;
-        }
-        else
-        {
-            Passengers_tailPtr->next_passenger = User;
-            Passengers_tailPtr = Passengers_tailPtr->next_passenger;
-        }
+
 
     Write_user_file(1);//将用户注册信息写入User_File.ini
 
