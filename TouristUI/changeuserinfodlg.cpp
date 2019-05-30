@@ -74,6 +74,7 @@ ChangeUserInfoDlg::ChangeUserInfoDlg(QWidget *parent) :
         WritePrivateProfileStructA(User->ID, str1, &cur, sizeof(PathNode), ".\\User_Route.ini");
 
         Travelstate[touristnum] = 1;
+        User->status.loca = STAY_IN_CITY；
     }
     else
     {
