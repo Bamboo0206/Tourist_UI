@@ -175,8 +175,8 @@ Status Read_system_file()
 
 	//GetPrivateProfileStructA("GRAPH", "graph", &city_graph, sizeof(GRAPH), ".\\System_File.ini");
 
-    int number=GetPrivateProfileIntA("Passenger", "number", 0, ".D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
-
+    int number=GetPrivateProfileIntA("Passenger", "number", 0, "D:\\SourceCode\\Tourist_UI\\TouristUI\\System_File.ini");
+    cout<<number<<endl;
 	//逐个读取旅客信息
 	if (number > 0)
 	{

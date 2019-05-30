@@ -101,14 +101,14 @@ typedef struct passenger {
 	int num_passby;//途经节点数量
 	int pass_by[2][MAX_NODE_NUM];//row0要求途经的城市;row1在该地停留时间 //已经访问过的城市需要标记？？？
 	int Time_Limited;//若限制时间最少费用，还有一项限制的时间
-	SYSTEM_TIME start_time;//旅行者开始旅行的时间
-	User_Status status;//旅客旅行状态
-
     //QPainterPath *qPath;//路径，用于画图
     int coor_x,coor_y;//坐标
     //QLabel userLoc_lb;
     int red,green,blue;//路径颜色
 
+
+    SYSTEM_TIME start_time;//旅行者开始旅行的时间
+	User_Status status;//旅客旅行状态
 
 	//FILE *fptr_route;	//路线——由旅行线路生成算法计算得到，若用户中途修改策略，路线会被全部覆盖重写，
 						//面向程序设计者
@@ -154,7 +154,7 @@ void Read_trans_t();
 //Status User_sign_in(void);
 void Min_Cost();
 Status Min_Time();
-Status Min_Time_Limited_Time();
+Status Min_Cost_Limited_Time();
 Status Output_route(PATH tour);
 Status Finish_Path(PATH tour);
 //Status Output_Status(PASSENGER *psg);

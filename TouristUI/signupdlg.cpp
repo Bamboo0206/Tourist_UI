@@ -13,6 +13,7 @@ SignupDlg::SignupDlg(QWidget *parent) :
     ui(new Ui::SignupDlg)
 {
     ui->setupUi(this);
+    ui->password_le->setEchoMode(QLineEdit::Password);
 }
 
 SignupDlg::~SignupDlg()

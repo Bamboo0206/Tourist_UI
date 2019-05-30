@@ -3,6 +3,7 @@
 #include"passbydlg.h"
 #include"outputroutedlg.h"
 #include"main.h"
+#include<QMessageBox>
 
 extern PASSENGER *Passengers , *Passengers_tailPtr
         , *User;//User当前系统使用者
@@ -74,12 +75,13 @@ ChangeUserInfoDlg::ChangeUserInfoDlg(QWidget *parent) :
         WritePrivateProfileStructA(User->ID, str1, &cur, sizeof(PathNode), ".\\User_Route.ini");
 
         Travelstate[touristnum] = 1;
-        User->status.loca = STAY_IN_CITY；
+        //User->status.loca = STAY_IN_CITY;
     }
     else
     {
         User->src = User->status.dest;
         User->start_time=System_Time;
+        User->status.loca = STAY_IN_CITY;
     }
 
     cout<<"psg current location: "<<city_graph.City_Name[User->src]<<endl;
@@ -161,18 +163,32 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
         {
         case 0:
             Min_Cost();
+            cout<<"change route :compute route done."<<endl;
+            accept();//退出change route窗口
             break;
         case 1:
             Min_Time();
+            cout<<"change route :compute route done."<<endl;
+            accept();//退出change route窗口
             break;
         case 2:
-            Min_Time_Limited_Time();
-            break;
+        if(Min_Cost_Limited_Time()==Error)
+        {
+            QMessageBox::warning(this, QString::fromLocal8Bit("警告！"),
+                               QString::fromLocal8Bit("限制时间过短，请重新输入"),
+                               QMessageBox::Yes);
+        }
+        else
+        {
+            cout<<"change route :compute route done."<<endl;
+            accept();//退出change route窗口
+        }
+
+        break;
         default:
             break;
         }
-    cout<<"change route :compute route done."<<endl;
-    accept();//退出change route窗口
+
 }
 
 void ChangeUserInfoDlg::on_strategy_cbx_currentIndexChanged(int index)

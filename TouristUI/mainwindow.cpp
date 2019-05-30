@@ -277,15 +277,78 @@ void MainWindow::showUserCoordinate()
     int cnt=0;
     while(temp!=NULL&&temp->coor_x!=0&&temp->coor_y!=0)
     {
-        int CurrentCity=temp->status.src;
-        temp->coor_x=coordinate[CurrentCity].x;
-        temp->coor_y=coordinate[CurrentCity].y;
 
-        //temp->userLoc_lb.move(temp->coor_x,temp->coor_y);
+        /*设置图标*/
+
+        QImage *img=new QImage;//新建一个image对象
+        switch (temp->status.loca) {
+        case STAY_IN_CITY:
+            if(!(img->load("D:/SourceCode/Tourist_UI/TouristUI/stay.png")))//将图像资源载入对象img
+            {
+                userLoc_lb[cnt]->setText("fail to load picture");
+            }
+            else
+                userLoc_lb[cnt]->setPixmap((QPixmap::fromImage(*img)));
+            break;
+        case ARRIVE:
+            //QImage *img=new QImage;//新建一个image对象
+            if(!(img->load("D:/SourceCode/Tourist_UI/TouristUI/arrive.png")))//将图像资源载入对象img
+            {
+                userLoc_lb[cnt]->setText("fail to load picture");
+            }
+            else
+                userLoc_lb[cnt]->setPixmap((QPixmap::fromImage(*img)));
+            break;
+        case IN_CAR:
+            //QImage *img=new QImage;//新建一个image对象
+            if(!(img->load("D:/SourceCode/Tourist_UI/TouristUI/car.png")))//将图像资源载入对象img
+            {
+                userLoc_lb[cnt]->setText("fail to load picture");
+            }
+            else
+                userLoc_lb[cnt]->setPixmap((QPixmap::fromImage(*img)));
+            break;
+        case IN_TRAIN:
+            //QImage *img=new QImage;//新建一个image对象
+            if(!(img->load("D:/SourceCode/Tourist_UI/TouristUI/train.png")))//将图像资源载入对象img
+            {
+                userLoc_lb[cnt]->setText("fail to load picture");
+            }
+            else
+                userLoc_lb[cnt]->setPixmap((QPixmap::fromImage(*img)));
+            break;
+        case IN_AIRPLANE:
+            //QImage *img=new QImage;//新建一个image对象
+            if(!(img->load("D:/SourceCode/Tourist_UI/TouristUI/airplane.png")))//将图像资源载入对象img
+            {
+                userLoc_lb[cnt]->setText("fail to load picture");
+            }
+            else
+                userLoc_lb[cnt]->setPixmap((QPixmap::fromImage(*img)));
+            break;
+        default:
+            break;
+        }
+
+        /*设置坐标*/
+
+        int CurrentCity=temp->status.src;
+        int nextCity=temp->status.dest;
+        if(temp->status.loca==STAY_IN_CITY)
+        {
+            temp->coor_x=coordinate[CurrentCity].x;
+            temp->coor_y=coordinate[CurrentCity].y;
+        }
+        else
+        {
+            temp->coor_x=(coordinate[CurrentCity].x+coordinate[nextCity].x)/2;
+            temp->coor_y=(coordinate[CurrentCity].y+coordinate[nextCity].y)/2;
+        }
         cout<<"(x,y):"<<temp->coor_x<<","<<temp->coor_y;
-//        temp->userLoc_lb.show();
         userLoc_lb[cnt]->move(temp->coor_x,temp->coor_y);
+        userLoc_lb[cnt]->adjustSize();
         userLoc_lb[cnt]->show();
+
         cnt++;
         temp=temp->next_passenger;
     }

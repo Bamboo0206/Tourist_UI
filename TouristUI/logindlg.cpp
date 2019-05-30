@@ -12,6 +12,7 @@ LoginDlg::LoginDlg(QWidget *parent) :
     ui(new Ui::LoginDlg)
 {
     ui->setupUi(this);
+    ui->password_le->setEchoMode(QLineEdit::Password);
 }
 
 LoginDlg::~LoginDlg()

@@ -383,8 +383,9 @@ Status Limited_Time(PATH tour)
 
 		if (finish == true)
 		{
-			cout << "未找到路线！" << endl;
-			break;
+            cout << "限制时间过短，未找到路线！" << endl;
+            return Error;
+            //break;
 		}
 	}
 
@@ -392,7 +393,7 @@ Status Limited_Time(PATH tour)
 }
 
 //旅客限制时间最小花费旅行策略
-Status Min_Time_Limited_Time()
+Status Min_Cost_Limited_Time()
 {
 	//确定路线数量
 	int path_number = 1;
@@ -459,7 +460,9 @@ Status Min_Time_Limited_Time()
 	Finish_Path(tour);
 
 	if (Calculate_Time(tour) > User->Time_Limited)
-		Limited_Time(tour);
+        if(Limited_Time(tour)==Error)
+            return Error;
+
 
 	cout << "旅途总时长：" << Calculate_Time(tour) << endl
 		<< "旅途总花费：" << Calculate_Cost(tour) << endl;

@@ -1,7 +1,7 @@
 ﻿#include "newroutedlg.h"
 #include "ui_newroutedlg.h"
 #include"passbydlg.h"
-
+#include<QMessageBox>
 #include"main.h"
 
 extern PASSENGER *Passengers , *Passengers_tailPtr 
@@ -60,19 +60,31 @@ void newRouteDlg::on_pushButton_2_clicked()
         {
         case 0:
             Min_Cost();
+
+            cout<<"compute route done."<<endl;
+            accept();//退出newRoute窗口
             break;
         case 1:
             Min_Time();
+            cout<<"compute route done."<<endl;
+            accept();//退出newRoute窗口
             break;
         case 2:
-            Min_Time_Limited_Time();
+            if(Min_Cost_Limited_Time()==Error)
+            {
+                QMessageBox::warning(this, QString::fromLocal8Bit("警告！"),
+                                   QString::fromLocal8Bit("限制时间过短，请重新输入"),
+                                   QMessageBox::Yes);
+            }
+            else
+            {
+                cout<<"change route :compute route done."<<endl;
+                accept();//退出change route窗口
+            }
             break;
         default:
             break;
         }
-    cout<<"compute route done."<<endl;
-
-    accept();//退出newRoute窗口
 
 }
 
