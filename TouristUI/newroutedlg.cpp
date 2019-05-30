@@ -29,6 +29,8 @@ newRouteDlg::newRouteDlg(QWidget *parent) :
 
     ui->src_cbx->addItems(cities);
     ui->dest_cbx->addItems(cities);
+
+    cout<<"newRouteDlg showed"<<endl;
 }
 
 newRouteDlg::~newRouteDlg()

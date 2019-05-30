@@ -23,7 +23,7 @@ int Travelstate[10] = { 0 };
 QShow_Time::QShow_Time(QObject *parent)
     :QObject(parent)
 {
-    TimerId=startTimer(10000);
+    TimerId=startTimer(5000);
 }
 
 QShow_Time::~QShow_Time()
@@ -34,9 +34,17 @@ QShow_Time::~QShow_Time()
 
 void QShow_Time::timerEvent(QTimerEvent *event)
 {
-    time_thread();
+    qDebug()<<"timerEvent() called"<<endl;
+    if(!inputing)
+    {
+    //time_thread();
     //MW->paintEvent();
-    qDebug()<<"Call time_thread!";
+    MW->showUserCoordinate();
+    MW->updateTable();
+    qDebug()<<"timerEvent() done"<<endl;
+   /* if(TimerId!=0)
+        killTimer(TimerId);*/
+    }
 }
 
 
@@ -60,15 +68,17 @@ void time_thread()
         QTime curTime = QTime::currentTime();
 
         //if (!inputing)
-        if((curTime.second()-preTime.second())>0
+        if((curTime.second()-preTime.second())>=5
                 ||(curTime.minute()-preTime.minute())>0
                 ||(curTime.hour()-preTime.hour())>0
                 )//大于1s就刷新
 		{
-            preTime=curTime;
             /*线程加锁*/
             lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
-            qDebug()<<"looping: time_thread() updating";
+
+
+            preTime=curTime;
+             qDebug()<<"looping: time_thread() updating";
             //Sleep(1000);
 
 
@@ -103,9 +113,13 @@ void time_thread()
 			}
 
             /*刷新路径*/
-            MW->updatePath();
+            //MW->updatePath();
             /*刷新时间*/
             MW->change_sysTime();
+            /*刷新旅客坐标并显示*/
+            //updateUserCoordinate();
+            //MW->showUserCoordinate();
+            //QShow_Time *show_time=new QShow_Time();
 
 		}
 		else if (inputing)
@@ -203,7 +217,11 @@ Status Refresh(PASSENGER *tourist, int touristnum)
 
 	memset(str1, 0, sizeof(str1));
 	sprintf(str1, "No.%d", Travelstate[touristnum]);
-	GetPrivateProfileStructA(tourist->ID, str1, &cur, sizeof(PathNode), filename);
+    if(GetPrivateProfileStructA(tourist->ID, str1, &cur, sizeof(PathNode), filename)==0)
+    {
+        cout<<"Refresh ERROR, GetStruct failed"<<endl;
+        return Error;
+    }
 
 	while (!RefreshOK)
 	{
@@ -216,7 +234,7 @@ Status Refresh(PASSENGER *tourist, int touristnum)
 		else if ((System_Time.year - cur.start_time.year) * 360 * 24 + (System_Time.month - cur.start_time.month) * 30 * 24 +
 			(System_Time.date - cur.start_time.date) * 24 + (System_Time.hour - cur.start_time.hour) < cur.time)
 			//旅客出发前往下一个城市
-		{
+        {
 			struct trans_t *trans = city_graph.pp_G[cur.src][cur.dest].p_TransTable;
 			while (trans != NULL)
 			{
@@ -245,6 +263,11 @@ Status Refresh(PASSENGER *tourist, int touristnum)
 			memset(str1, 0, sizeof(str1));
 			sprintf(str1, "No.%d", Travelstate[touristnum]);
 			GetPrivateProfileStructA(tourist->ID, str1, &cur, sizeof(PathNode), filename);
+            if(GetPrivateProfileStructA(tourist->ID, str1, &cur, sizeof(PathNode), filename)==0)
+            {
+                cout<<"Refresh ERROR, GetStruct failed"<<endl;
+                break;
+            }
 		}
 	}
 

@@ -177,14 +177,17 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
 void ChangeUserInfoDlg::on_strategy_cbx_currentIndexChanged(int index)
 {
     index=ui->strategy_cbx->currentIndex();
+    cout<<"Index changed : "<<index<<endl;
     if(index==2)
     {
         QLabel *lb=new QLabel(this);
-        lb->move(200,300);//参数待改
-        lb->setText(tr("请输入限制时间"));
+        lb->move(380,220);
+        lb->setText(QString::fromLocal8Bit("请输入限制时间"));
+        lb->show();
 
         LimTime_le=new QLineEdit(this);
-        LimTime_le->move(200,400);
+        LimTime_le->move(550,220);
+        LimTime_le->show();
     }
 }
 

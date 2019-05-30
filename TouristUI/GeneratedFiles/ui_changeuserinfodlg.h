@@ -63,10 +63,6 @@ public:
         strategy_cbx->setObjectName(QStringLiteral("strategy_cbx"));
         strategy_cbx->setGeometry(QRect(160, 210, 151, 22));
         dest_cbx = new QComboBox(ChangeUserInfoDlg);
-        dest_cbx->addItem(QString());
-        dest_cbx->addItem(QString());
-        dest_cbx->addItem(QString());
-        dest_cbx->addItem(QString());
         dest_cbx->setObjectName(QStringLiteral("dest_cbx"));
         dest_cbx->setGeometry(QRect(480, 60, 131, 22));
         cityNum_lineEdit = new QLineEdit(ChangeUserInfoDlg);
@@ -93,11 +89,6 @@ public:
         strategy_cbx->setItemText(0, QApplication::translate("ChangeUserInfoDlg", "\346\234\200\345\260\221\350\212\261\350\264\271", nullptr));
         strategy_cbx->setItemText(1, QApplication::translate("ChangeUserInfoDlg", "\346\234\200\347\237\255\347\224\250\346\227\266", nullptr));
         strategy_cbx->setItemText(2, QApplication::translate("ChangeUserInfoDlg", "\351\231\220\345\210\266\346\227\266\351\227\264\346\234\200\345\260\221\350\212\261\350\264\271", nullptr));
-
-        dest_cbx->setItemText(0, QApplication::translate("ChangeUserInfoDlg", "\345\214\227\344\272\254", nullptr));
-        dest_cbx->setItemText(1, QApplication::translate("ChangeUserInfoDlg", "\345\244\251\346\264\245", nullptr));
-        dest_cbx->setItemText(2, QApplication::translate("ChangeUserInfoDlg", "\350\245\277\345\256\211", nullptr));
-        dest_cbx->setItemText(3, QApplication::translate("ChangeUserInfoDlg", "\344\270\212\346\265\267", nullptr));
 
         src_lb->setText(QApplication::translate("ChangeUserInfoDlg", "TextLabel", nullptr));
     } // retranslateUi

@@ -39,10 +39,6 @@ public:
             newRouteDlg->setObjectName(QStringLiteral("newRouteDlg"));
         newRouteDlg->resize(736, 350);
         src_cbx = new QComboBox(newRouteDlg);
-        src_cbx->addItem(QString());
-        src_cbx->addItem(QString());
-        src_cbx->addItem(QString());
-        src_cbx->addItem(QString());
         src_cbx->setObjectName(QStringLiteral("src_cbx"));
         src_cbx->setGeometry(QRect(150, 70, 131, 22));
         label = new QLabel(newRouteDlg);
@@ -52,10 +48,6 @@ public:
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(450, 70, 72, 15));
         dest_cbx = new QComboBox(newRouteDlg);
-        dest_cbx->addItem(QString());
-        dest_cbx->addItem(QString());
-        dest_cbx->addItem(QString());
-        dest_cbx->addItem(QString());
         dest_cbx->setObjectName(QStringLiteral("dest_cbx"));
         dest_cbx->setGeometry(QRect(510, 70, 131, 22));
         label_3 = new QLabel(newRouteDlg);
@@ -88,18 +80,8 @@ public:
     void retranslateUi(QDialog *newRouteDlg)
     {
         newRouteDlg->setWindowTitle(QApplication::translate("newRouteDlg", "Dialog", nullptr));
-        src_cbx->setItemText(0, QApplication::translate("newRouteDlg", "\345\214\227\344\272\254", nullptr));
-        src_cbx->setItemText(1, QApplication::translate("newRouteDlg", "\345\244\251\346\264\245", nullptr));
-        src_cbx->setItemText(2, QApplication::translate("newRouteDlg", "\350\245\277\345\256\211", nullptr));
-        src_cbx->setItemText(3, QApplication::translate("newRouteDlg", "\344\270\212\346\265\267", nullptr));
-
         label->setText(QApplication::translate("newRouteDlg", "\350\265\267\347\202\271\357\274\232", nullptr));
         label_2->setText(QApplication::translate("newRouteDlg", "\347\273\210\347\202\271\357\274\232", nullptr));
-        dest_cbx->setItemText(0, QApplication::translate("newRouteDlg", "\345\214\227\344\272\254", nullptr));
-        dest_cbx->setItemText(1, QApplication::translate("newRouteDlg", "\345\244\251\346\264\245", nullptr));
-        dest_cbx->setItemText(2, QApplication::translate("newRouteDlg", "\350\245\277\345\256\211", nullptr));
-        dest_cbx->setItemText(3, QApplication::translate("newRouteDlg", "\344\270\212\346\265\267", nullptr));
-
         label_3->setText(QApplication::translate("newRouteDlg", "\351\200\224\347\273\217\345\237\216\345\270\202\346\225\260\351\207\217\357\274\232", nullptr));
         passby_btn->setText(QApplication::translate("newRouteDlg", "\347\241\256\345\256\232", nullptr));
         label_4->setText(QApplication::translate("newRouteDlg", "\346\227\205\350\241\214\347\255\226\347\225\245\357\274\232", nullptr));

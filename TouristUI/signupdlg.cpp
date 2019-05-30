@@ -26,12 +26,13 @@ void SignupDlg::on_signUp_btn_clicked()//注册按钮被按下
 
     if(User)//不为空
     {
-        qDebug()<<"User不为空,我把它覆盖了";
-    }
+        cout<<"User不为空,我把它覆盖了"<<endl;    }
 
     /*新建用户*/
     User = new PASSENGER;
     User->next_passenger=NULL;
+    User->coor_x=0;
+    User->coor_y=0;
 
     /*加入passenger链表*/
     if (Passengers_headPtr == NULL)
@@ -47,6 +48,7 @@ void SignupDlg::on_signUp_btn_clicked()//注册按钮被按下
 
     strcpy(User->ID, ui->userName_lineEdit->text().toLatin1().data());//输入用户名
 
+    cout<<"added into passenger链表"<<endl;
     accept();
 
     /*if(1)//待改：如果用户名存在

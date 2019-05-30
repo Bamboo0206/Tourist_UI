@@ -10,6 +10,7 @@
 #include <QImage>
 #include <QtGui>
 #include <vector>
+#include <QLabel>
 #include "main.h"
 #include "time_thread.h"
 #include "QDebug"
@@ -20,6 +21,7 @@ extern PASSENGER *Passengers, *Passengers_tailPtr, *User;//User当前系统使�
 extern SYSTEM_TIME System_Time;
 extern GRAPH city_graph;
 extern int Travelstate[10];
+
 
 MainWindow *MW;
 COORDINATE coordinate[100/*城市数量*/];
@@ -53,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
                 <<QStringList()<<QString::fromLocal8Bit("班次"));
     ui->allUser_tb->setEditTriggers(QAbstractItemView::NoEditTriggers);//禁止修改
 
-    //QShow_Time *show_time=new QShow_Time(this);
+    QShow_Time *show_time=new QShow_Time(this);
 
     /*添加定时器*/
    /* QTimer *timer=new QTimer(this);//声明一个定时器
@@ -61,6 +63,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer,SIGNAL(timeout()),this,SLOT(update()));//更新画图
     timer->start(3000);//每1000ms timeout一次，于是就update一次
 */
+    for(int i=0;i<10;i++)
+    {
+        userLoc_lb[i]=new QLabel(this);
+    }
+
     cout<<"create MainWindow successfully"<<endl;
 }
 
@@ -103,6 +110,7 @@ void MainWindow::on_signUp_btn_clicked()//注册
     SignupDlg *sDlg=new SignupDlg(this);
     if(sDlg->exec()==QDialog::Accepted)
     {
+        cout<<"Sign up Dialog accepted"<<endl;
         newRouteDlg nDlg(this);//新建一个窗口（对象），并等待返回值
         if(nDlg.exec()==QDialog::Accepted)
         {
@@ -155,6 +163,14 @@ void MainWindow::on_signUp_btn_clicked()//注册
 
             ui->allUser_tb->show();
             cout<<"add Row in main table done"<<endl;
+
+            //刷新所有人坐标并显示
+            User->coor_x=1;User->coor_y=1;
+
+            //User->userLoc_lb.setText(QString::fromLocal8Bit(temp->ID));
+            userLoc_lb[touristnum]->setText(QString::fromLocal8Bit(temp->ID));
+            //updateUserCoordinate();
+            showUserCoordinate();
         }
     }
     inputing=false;
@@ -196,12 +212,11 @@ void MainWindow::on_signUp_btn_clicked()//注册
 //        }
 //        temp=temp->next_passenger;
 //    }
+//    cout<<"paintEvent() done"<<endl;
 
 //}
-void MainWindow::updatePath()
-{
-//    /*线程加锁*/
-//    //lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+//void MainWindow::updatePath()
+//{
 
 //    cout <<"updatePath() called"<<endl;
 //    /*更新所有路径*/
@@ -234,12 +249,53 @@ void MainWindow::updatePath()
 
 //        temp=temp->next_passenger;
 //    }
+//    cout <<"updatePath() done"<<endl;
+//}
+//void updateUserCoordinate()
+//{
+//    cout<<"updateUserCoordinate() called"<<endl;
+//    /*更新所有用户坐标*/
+//    PASSENGER *temp=Passengers;
+//    while(temp!=NULL)
+//    {
+//        int CurrentCity=temp->status.src;
+//        temp->coor_x=coordinate[CurrentCity].x;
+//        temp->coor_y=coordinate[CurrentCity].y;
+
+//        temp=temp->next_passenger;
+//    }
+//    cout<<"updateUserCoordinate() done"<<endl;
+//}
+void MainWindow::showUserCoordinate()
+{
+    /*线程加锁*/
+    //lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+
+    cout<<"showUserCoordinate() called"<<endl;
+    /*更新所有用户坐标*/
+    PASSENGER *temp=Passengers;
+    int cnt=0;
+    while(temp!=NULL&&temp->coor_x!=0&&temp->coor_y!=0)
+    {
+        int CurrentCity=temp->status.src;
+        temp->coor_x=coordinate[CurrentCity].x;
+        temp->coor_y=coordinate[CurrentCity].y;
+
+        //temp->userLoc_lb.move(temp->coor_x,temp->coor_y);
+        cout<<"(x,y):"<<temp->coor_x<<","<<temp->coor_y;
+//        temp->userLoc_lb.show();
+        userLoc_lb[cnt]->move(temp->coor_x,temp->coor_y);
+        userLoc_lb[cnt]->show();
+        cnt++;
+        temp=temp->next_passenger;
+    }
+    cout<<"  showUserCoordinate() done"<<endl;
 }
 
 void MainWindow::initCoordinate()//初始化每个城市的坐标
 {
     /*线程加锁*/
-    //lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
+    lock_guard<mutex> LockGuard(myMutex);//lock_gurad创建的时候开始加锁，在其析构的时候，释放锁。
 
     coordinate[0].x=780;
     coordinate[0].y=339;
@@ -299,27 +355,29 @@ void MainWindow::updateTable()//更新main里的表格
     int Row=0;
     while(temp!=NULL&&Row<RowCount)
     {
-        ui->allUser_tb->setItem(Row,0,new QTableWidgetItem(tr(User->ID)));//改为变量
+        ui->allUser_tb->setItem(Row,0,new QTableWidgetItem(tr(temp->ID)));//改为变量
 
-        switch (User->status.loca) {
+        switch (temp->status.loca) {
         case STAY_IN_CITY:
             ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[3].c_str())));
-            ui->allUser_tb->setItem(Row,2,new QTableWidgetItem(tr(city_graph.City_Name[User->status.src])));
+            ui->allUser_tb->setItem(Row,2,new QTableWidgetItem(QString::fromLocal8Bit(city_graph.City_Name[temp->status.src])));
+            ui->allUser_tb->setItem(Row,3,new QTableWidgetItem(tr("")));
             break;
         case ARRIVE:
             ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[4].c_str())));
-            ui->allUser_tb->setItem(Row,2,new QTableWidgetItem(tr(city_graph.City_Name[User->status.dest])));
+            ui->allUser_tb->setItem(Row,2,new QTableWidgetItem(QString::fromLocal8Bit(city_graph.City_Name[temp->status.dest])));
+            ui->allUser_tb->setItem(Row,3,new QTableWidgetItem(tr("")));
             break;
         default:
-            ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[(int)User->status.loca].c_str())));
-            string s1=city_graph.City_Name[User->status.src];
-            string s2=city_graph.City_Name[User->status.dest];
+            ui->allUser_tb->setItem(Row,1,new QTableWidgetItem(tr(loca[(int)temp->status.loca].c_str())));
+            string s1=city_graph.City_Name[temp->status.src];
+            string s2=city_graph.City_Name[temp->status.dest];
             string s3="-->";
             string str=s1+s3+s2;
-            ui->allUser_tb->setItem(RowCount,2,new QTableWidgetItem(tr(str.c_str())));
+            ui->allUser_tb->setItem(Row,2,new QTableWidgetItem(QString::fromLocal8Bit(str.c_str())));
 
 
-            ui->allUser_tb->setItem(RowCount,3,new QTableWidgetItem(tr(User->status.name)));
+            ui->allUser_tb->setItem(Row,3,new QTableWidgetItem(QString::fromLocal8Bit(temp->status.name)));
             break;
         }
 

@@ -22,18 +22,26 @@ class Ui_outputRouteDlg
 public:
     QLabel *label;
     QPushButton *start_btn;
+    QLabel *route;
 
     void setupUi(QDialog *outputRouteDlg)
     {
         if (outputRouteDlg->objectName().isEmpty())
             outputRouteDlg->setObjectName(QStringLiteral("outputRouteDlg"));
-        outputRouteDlg->resize(400, 300);
+        outputRouteDlg->resize(675, 300);
         label = new QLabel(outputRouteDlg);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(30, 20, 72, 15));
+        label->setGeometry(QRect(30, 20, 71, 31));
+        QFont font;
+        font.setPointSize(15);
+        label->setFont(font);
         start_btn = new QPushButton(outputRouteDlg);
         start_btn->setObjectName(QStringLiteral("start_btn"));
-        start_btn->setGeometry(QRect(280, 260, 93, 28));
+        start_btn->setGeometry(QRect(540, 250, 93, 28));
+        start_btn->setFont(font);
+        route = new QLabel(outputRouteDlg);
+        route->setObjectName(QStringLiteral("route"));
+        route->setGeometry(QRect(40, 70, 601, 161));
 
         retranslateUi(outputRouteDlg);
 
@@ -45,6 +53,7 @@ public:
         outputRouteDlg->setWindowTitle(QApplication::translate("outputRouteDlg", "Dialog", nullptr));
         label->setText(QApplication::translate("outputRouteDlg", "\350\267\257\347\272\277\344\270\272", nullptr));
         start_btn->setText(QApplication::translate("outputRouteDlg", "\345\274\200\345\247\213", nullptr));
+        route->setText(QString());
     } // retranslateUi
 
 };

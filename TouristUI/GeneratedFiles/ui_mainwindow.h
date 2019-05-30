@@ -43,7 +43,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1503, 896);
+        MainWindow->resize(1623, 896);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         pic_lb = new QLabel(centralWidget);
@@ -55,13 +55,13 @@ public:
         lable->setGeometry(QRect(1070, 110, 72, 15));
         SysTime_lb = new QLabel(centralWidget);
         SysTime_lb->setObjectName(QStringLiteral("SysTime_lb"));
-        SysTime_lb->setGeometry(QRect(1160, 110, 72, 15));
+        SysTime_lb->setGeometry(QRect(1160, 110, 271, 16));
         allUser_lb = new QLabel(centralWidget);
         allUser_lb->setObjectName(QStringLiteral("allUser_lb"));
         allUser_lb->setGeometry(QRect(1070, 150, 72, 15));
         allUser_tb = new QTableWidget(centralWidget);
         allUser_tb->setObjectName(QStringLiteral("allUser_tb"));
-        allUser_tb->setGeometry(QRect(1060, 190, 421, 231));
+        allUser_tb->setGeometry(QRect(1060, 190, 551, 291));
         signUp_btn = new QPushButton(centralWidget);
         signUp_btn->setObjectName(QStringLiteral("signUp_btn"));
         signUp_btn->setGeometry(QRect(1210, 530, 93, 28));
@@ -74,7 +74,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1503, 26));
+        menuBar->setGeometry(QRect(0, 0, 1623, 26));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));

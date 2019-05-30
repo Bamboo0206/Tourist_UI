@@ -19,6 +19,8 @@ using namespace std;
 #include<QDebug>
 #include <QPainter>
 #include <QtGui>
+#include<QLabel>
+//#include<QWidget>
 
 
 /*常量定义*/
@@ -102,7 +104,9 @@ typedef struct passenger {
 	SYSTEM_TIME start_time;//旅行者开始旅行的时间
 	User_Status status;//旅客旅行状态
 
-    QPainterPath *qPath;//路径，用于画图
+    //QPainterPath *qPath;//路径，用于画图
+    int coor_x,coor_y;//坐标
+    //QLabel userLoc_lb;
     int red,green,blue;//路径颜色
 
 
@@ -171,6 +175,7 @@ void Freememory(void);
 int Calculate_Time(PATH tour);
 int Calculate_Cost(PATH tour);
 
+void updateUserCoordinate();
 
 #endif  //MYTOURISTMAIN_H
 

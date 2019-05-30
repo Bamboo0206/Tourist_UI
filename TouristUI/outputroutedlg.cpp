@@ -59,13 +59,13 @@ outputRouteDlg::~outputRouteDlg()
 
 void outputRouteDlg::on_start_btn_clicked()//开始旅行按钮
 {
-    /*修改qPath*/
-    User->qPath=new QPainterPath;
-    int location=User->src;
-    User->qPath->moveTo(coordinate[location].x,coordinate[location].y/*起点坐标*/);
-    User->red=rand()%256;
-    User->green=rand()%256;
-    User->blue=rand()%256;
+//    /*修改qPath*/
+//    User->qPath=new QPainterPath;
+//    int location=User->src;
+//    User->qPath->moveTo(coordinate[location].x,coordinate[location].y/*起点坐标*/);
+//    User->red=rand()%256;
+//    User->green=rand()%256;
+//    User->blue=rand()%256;
 
 
 
@@ -76,18 +76,18 @@ void outputRouteDlg::on_start_btn_clicked()//开始旅行按钮
 
 
 
-    PASSENGER *temp = Passengers;
-        int touristnum = 0;
-        while (temp != NULL)
-        {
-            if (temp == User)
-                break;
-            else
-                touristnum ++;
+//    PASSENGER *temp = Passengers;
+//        int touristnum = 0;
+//        while (temp != NULL)
+//        {
+//            if (temp == User)
+//                break;
+//            else
+//                touristnum ++;
 
-            temp = temp->next_passenger;
-        }
-        Travelstate[touristnum] = 1;
+//            temp = temp->next_passenger;
+//        }
+//        Travelstate[touristnum] = 1;
 
 
     /*刷新main的表格？*/
