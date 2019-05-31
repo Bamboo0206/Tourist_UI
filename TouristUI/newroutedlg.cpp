@@ -52,7 +52,7 @@ void newRouteDlg::on_pushButton_2_clicked()
     else
         User->Time_Limited= NULL;
     User->start_time=System_Time;
-    cout<<User->src<<User->dest<<User->strategy<<endl;
+    cout<<"src"<<User->src<<" dest"<<User->dest<<" strategy"<<User->strategy<<endl;
 
 
     /*调用计算路径的函数*/

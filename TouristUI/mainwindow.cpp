@@ -92,6 +92,16 @@ void MainWindow::on_signIn_btn_clicked()//登陆
         LoginOptionDlg *loDlg=new LoginOptionDlg(this);
         if(loDlg->exec()==QDialog::Accepted)
         {
+//            PASSENGER *temp=Passengers;
+//            int touristnum=0;
+//            while(temp!=User)
+//            {
+//                temp=temp->next_passenger;
+//                touristnum++;
+//            }
+//            Travelstate[touristnum]=1;
+//            Refresh(User, touristnum);
+
             cout<<"Login Option Dlg Accepted"<<endl;
         }
     }

@@ -164,6 +164,7 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
         case 0:
             Min_Cost();
             cout<<"change route :compute route done."<<endl;
+
             accept();//退出change route窗口
             break;
         case 1:
@@ -181,6 +182,7 @@ void ChangeUserInfoDlg::on_compute_btn_clicked()//计算路径的按钮
         else
         {
             cout<<"change route :compute route done."<<endl;
+
             accept();//退出change route窗口
         }
 
