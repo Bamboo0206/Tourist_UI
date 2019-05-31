@@ -97,6 +97,7 @@ void MainWindow::on_signIn_btn_clicked()//登陆
     }
     /*刷新main里的表格？？？？？？*/
     updateTable();
+    showUserCoordinate();
 
     inputing=false;
 }

@@ -30,6 +30,7 @@ void createMainWindow()
 
     w.initCoordinate();
     w.show();
+    w.change_sysTime();
 
     cout<<"MainWindow showed"<<endl;
     MW = &w;
